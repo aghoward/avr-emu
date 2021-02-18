@@ -16,8 +16,8 @@ class ASRInstructionTests : public ::testing::Test
 
     protected:
         ASRInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(uint8_t dst) const
         {
@@ -34,7 +34,7 @@ class ASRInstructionTests : public ::testing::Test
 
     public:
         ASRInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

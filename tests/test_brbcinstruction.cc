@@ -15,8 +15,8 @@ class BRBCInstructionTests : public ::testing::Test
 
     protected:
         BRBCInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(OpCode opcode, uint8_t src, int16_t dst) const
         {
@@ -27,7 +27,7 @@ class BRBCInstructionTests : public ::testing::Test
 
     public:
         BRBCInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

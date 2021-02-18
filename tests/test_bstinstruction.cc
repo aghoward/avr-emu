@@ -16,8 +16,8 @@ class BSTInstructionTests : public ::testing::Test
 
     protected:
         BSTInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -36,7 +36,7 @@ class BSTInstructionTests : public ::testing::Test
 
     public:
         BSTInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

@@ -15,6 +15,9 @@ cdif::Container BuildContainer()
     auto ctx = cdif::Container();
     ctx.registerModule<InstructionModule>();
 
+    ctx.bind<Memory>().in<cdif::Scope::Singleton>().build();
+    ctx.bind<CPU, Memory&>().in<cdif::Scope::Singleton>().build();
+
     ctx
         .bind<Executor, std::vector<std::unique_ptr<InstructionExecutor>>>()
         .build();
@@ -23,9 +26,9 @@ cdif::Container BuildContainer()
 
 int main()
 {
-    auto cpu = CPU{};
-    auto memory = Memory{};
     auto container = BuildContainer();
+    auto& cpu = container.resolve<CPU&>();
+    auto& memory = container.resolve<Memory&>();
     auto executor = container.resolve<Executor>();
     executor.Execute(cpu, memory, 10);
     return 0;

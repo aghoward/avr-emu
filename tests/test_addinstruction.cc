@@ -16,8 +16,8 @@ class ADDInstructionTests : public ::testing::Test
 
     protected:
         ADDInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(OpCode opcode, uint8_t src, uint8_t dst) const
         {
@@ -143,7 +143,7 @@ class ADDInstructionTests : public ::testing::Test
         }
     public:
         ADDInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

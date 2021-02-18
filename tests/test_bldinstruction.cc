@@ -16,8 +16,8 @@ class BLDInstructionTests : public ::testing::Test
 
     protected:
         BLDInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -36,7 +36,7 @@ class BLDInstructionTests : public ::testing::Test
 
     public:
         BLDInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

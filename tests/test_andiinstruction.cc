@@ -16,8 +16,8 @@ class ANDIInstructionTests : public ::testing::Test
 
     protected:
         ANDIInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -40,7 +40,7 @@ class ANDIInstructionTests : public ::testing::Test
 
     public:
         ANDIInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

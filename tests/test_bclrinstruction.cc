@@ -16,8 +16,8 @@ class BCLRInstructionTests : public ::testing::Test
 
     protected:
         BCLRInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(OpCode opcode, uint8_t src) const
         {
@@ -50,7 +50,7 @@ class BCLRInstructionTests : public ::testing::Test
 
     public:
         BCLRInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

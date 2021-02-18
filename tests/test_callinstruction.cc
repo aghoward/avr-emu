@@ -15,8 +15,8 @@ class CALLInstructionTests : public ::testing::Test
 
     protected:
         CALLInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -29,7 +29,8 @@ class CALLInstructionTests : public ::testing::Test
         {
             auto pc = static_cast<uint16_t>(
                     static_cast<uint16_t>(rand()) %
-                    (static_cast<uint16_t>(AVR_EMU_RAM_SIZE) - 2u));
+                    (static_cast<uint16_t>(AVR_EMU_RAM_SIZE) - 2u)
+                    + cpu.SRAM_BEG);
             cpu.PC = pc;
             auto shiftedAddress = static_cast<uint16_t>(address >> 1u);
             for (auto i = static_cast<uint16_t>(0u); i < sizeof(shiftedAddress); i++)
@@ -38,7 +39,7 @@ class CALLInstructionTests : public ::testing::Test
 
         uint16_t InitializeSP()
         {
-            uint16_t sp = static_cast<uint16_t>(rand()) + 2u;
+            uint16_t sp = static_cast<uint16_t>(rand()) + 2u + cpu.SRAM_BEG;
             cpu.SP = sp;
             for (uint16_t i = 0u; i < sizeof(cpu.PC); i++)
                 memory[i] = 0u;
@@ -56,7 +57,7 @@ class CALLInstructionTests : public ::testing::Test
 
     public:
         CALLInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

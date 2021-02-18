@@ -16,8 +16,8 @@ class ADIWInstructionTests : public ::testing::Test
 
     protected:
         ADIWInstruction subject;
-        CPU cpu;
         Memory memory;
+        CPU cpu;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dstIndex) const
         {
@@ -37,7 +37,7 @@ class ADIWInstructionTests : public ::testing::Test
 
     public:
         ADIWInstructionTests() :
-            subject(), cpu(), memory()
+            subject(), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
