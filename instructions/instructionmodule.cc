@@ -16,6 +16,7 @@
 #include "instructions/cp.h"
 #include "instructions/cpi.h"
 #include "instructions/cpse.h"
+#include "instructions/dec.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
 #include "instructions/notimplemented.h"
@@ -87,6 +88,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("CPSE")
             .build();
+        ctx.bind<DECInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("DEC")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -109,6 +114,7 @@ namespace avr {
                 std::unique_ptr<CPIInstruction>,
                 std::unique_ptr<CPInstruction>,
                 std::unique_ptr<CPSEInstruction>,
+                std::unique_ptr<DECInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }
