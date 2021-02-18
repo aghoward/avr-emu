@@ -1,6 +1,8 @@
 #include "cdif/cdif.h"
+#include "core/clock.h"
 #include "core/cpu.h"
 #include "core/executor.h"
+#include "core/iclock.h"
 #include "core/memory.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
@@ -15,11 +17,14 @@ cdif::Container BuildContainer()
     auto ctx = cdif::Container();
     ctx.registerModule<InstructionModule>();
 
+    ctx.bind<Clock>().as<IClock>().in<cdif::Scope::Singleton>().build();
     ctx.bind<Memory>().in<cdif::Scope::Singleton>().build();
     ctx.bind<CPU, Memory&>().in<cdif::Scope::Singleton>().build();
 
     ctx
-        .bind<Executor, std::vector<std::unique_ptr<InstructionExecutor>>>()
+        .bind<Executor,
+            IClock&,
+            std::vector<std::unique_ptr<InstructionExecutor>>>()
         .build();
     return ctx;
 }

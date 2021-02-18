@@ -21,7 +21,12 @@ namespace avr {
         auto& rd = GetDestinationRegister(cpu, opcode);
         auto src = GetSourceBit(opcode);
         auto mask = static_cast<uint8_t>(0xFFu ^ (0x1u << src));
-        rd &= mask;
+
+        uint8_t value = rd & mask;
+        _clock.ConsumeCycle();
+
+        rd = value;
+        _clock.ConsumeCycle();
 
         return _cyclesConsumed;
     }

@@ -1,5 +1,6 @@
 #include "core/cpu.h"
 #include "core/memory.h"
+#include "core/noopclock.h"
 #include "instructions/asr.h"
 #include "instructions/opcodes.h"
 
@@ -15,6 +16,7 @@ class ASRInstructionTests : public ::testing::Test
 {
 
     protected:
+        NoopClock clock;
         ASRInstruction subject;
         Memory memory;
         CPU cpu;
@@ -34,7 +36,7 @@ class ASRInstructionTests : public ::testing::Test
 
     public:
         ASRInstructionTests() :
-            subject(), memory(), cpu(memory)
+            clock(), subject(clock), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

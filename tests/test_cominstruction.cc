@@ -1,5 +1,6 @@
 #include "core/cpu.h"
 #include "core/memory.h"
+#include "core/noopclock.h"
 #include "instructions/com.h"
 #include "instructions/opcodes.h"
 
@@ -13,8 +14,8 @@ using namespace avr;
 
 class COMInstructionTests : public ::testing::Test
 {
-
     protected:
+        NoopClock clock;
         COMInstruction subject;
         Memory memory;
         CPU cpu;
@@ -34,7 +35,7 @@ class COMInstructionTests : public ::testing::Test
 
     public:
         COMInstructionTests() :
-            subject(), memory(), cpu(memory)
+            clock(), subject(clock), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

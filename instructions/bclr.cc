@@ -32,6 +32,8 @@ namespace avr {
         else if (src == 7u)
             cpu.SREG.I = flagValue;
 
+        _clock.ConsumeCycle();
+
         return _cyclesConsumed;
     }
 

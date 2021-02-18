@@ -1,5 +1,6 @@
 #include "core/cpu.h"
 #include "core/memory.h"
+#include "core/noopclock.h"
 #include "instructions/cp.h"
 #include "instructions/opcodes.h"
 
@@ -13,8 +14,8 @@ using namespace avr;
 
 class CPInstructionTests : public ::testing::Test
 {
-
     protected:
+        NoopClock clock;
         CPInstruction subject;
         Memory memory;
         CPU cpu;
@@ -36,7 +37,7 @@ class CPInstructionTests : public ::testing::Test
 
     public:
         CPInstructionTests() :
-            subject(), memory(), cpu(memory)
+            clock(), subject(clock), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

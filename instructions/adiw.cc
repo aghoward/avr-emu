@@ -39,8 +39,9 @@ namespace avr {
         SetRegisterFlags(cpu, cpu.R[dstIndex+1], value);
 
         cpu.R[dstIndex] = static_cast<uint8_t>(0xFF & value);
+        _clock.ConsumeCycle();
         cpu.R[dstIndex+1] = static_cast<uint8_t>(0xFF & (value >> 8));
-
+        _clock.ConsumeCycle();
         
         return _cyclesConsumed;
     }

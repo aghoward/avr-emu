@@ -35,6 +35,7 @@ namespace avr {
 
         SetRegisterFlags(cpu, value);
         rd = value;
+        _clock.ConsumeCycle();
 
         return _cyclesConsumed;
     }

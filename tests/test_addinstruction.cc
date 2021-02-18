@@ -1,5 +1,6 @@
 #include "core/cpu.h"
 #include "core/memory.h"
+#include "core/noopclock.h"
 #include "instructions/add.h"
 #include "instructions/opcodes.h"
 
@@ -15,6 +16,7 @@ class ADDInstructionTests : public ::testing::Test
 {
 
     protected:
+        NoopClock clock;
         ADDInstruction subject;
         Memory memory;
         CPU cpu;
@@ -143,7 +145,7 @@ class ADDInstructionTests : public ::testing::Test
         }
     public:
         ADDInstructionTests() :
-            subject(), memory(), cpu(memory)
+            clock(), subject(clock), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

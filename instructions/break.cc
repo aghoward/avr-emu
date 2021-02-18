@@ -6,6 +6,7 @@
 namespace avr {
     uint32_t BREAKInstruction::Execute(uint16_t, CPU&, Memory&) const
     {
+        _clock.ConsumeCycle();
         return _cyclesConsumed;
     }
 

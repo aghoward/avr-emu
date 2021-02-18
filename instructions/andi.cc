@@ -32,8 +32,8 @@ namespace avr {
         auto& dst = GetDestinationRegister(cpu, opcode);
         
         dst = static_cast<uint16_t>(dst & src);
-
         SetRegisterFlags(cpu, dst);
+        _clock.ConsumeCycle();
 
         return _cyclesConsumed;
     }

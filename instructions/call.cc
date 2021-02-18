@@ -8,7 +8,10 @@ namespace avr {
     {
         uint16_t returnAddress = cpu.PC + static_cast<uint16_t>(sizeof(cpu.PC));
         for (uint16_t i = 0u; i < sizeof(cpu.PC); i++)
+        {
+            _clock.ConsumeCycle();
             mem[cpu.SP--] = static_cast<uint8_t>((returnAddress >> (i * 8u)) & 0xFFu);
+        }
     }
 
     uint16_t CALLInstruction::GetDestinationAddress(CPU& cpu, Memory& mem) const
@@ -17,6 +20,7 @@ namespace avr {
         for (auto i = 0u; i < sizeof(address); i++)
             address |= static_cast<uint16_t>(mem[cpu.PC++] << (i * 8u));
         // Actual avr assembly has this shifted right one bit to prevent odd addresses
+        _clock.ConsumeCycle();
         return (address << 1u);
     }
 
@@ -24,6 +28,7 @@ namespace avr {
     {
         PushReturnAddress(cpu, mem);
         cpu.PC = GetDestinationAddress(cpu, mem);
+        _clock.ConsumeCycle();
         return _cyclesConsumed;
     }
 

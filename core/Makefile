@@ -5,7 +5,9 @@ AR_FLAGS +=rcs
 
 OBJ_DIR =./obj
 OBJECTS =${OBJ_DIR}/memory.o \
-		 ${OBJ_DIR}/executor.o
+		 ${OBJ_DIR}/executor.o \
+		 ${OBJ_DIR}/clock.o \
+		 ${OBJ_DIR}/noopclock.o
 
 LIB_DIR =../lib
 LIBRARIES =${LIB_DIR}/libcore.a

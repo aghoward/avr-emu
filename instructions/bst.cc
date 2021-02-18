@@ -23,6 +23,7 @@ namespace avr {
         auto& rd = GetDestinationRegister(cpu, opcode);
 
         cpu.SREG.T = (rd >> bitShift) == 1u;
+        _clock.ConsumeCycle();
 
         return _cyclesConsumed;
     }

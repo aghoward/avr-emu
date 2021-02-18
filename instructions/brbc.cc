@@ -44,7 +44,10 @@ namespace avr {
     uint32_t BRBCInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
     {
         auto flagIndex = GetSourceValue(opcode);
-        if (!ShouldBranch(opcode, cpu, flagIndex))
+
+        auto shouldBranch = ShouldBranch(opcode, cpu, flagIndex);
+        _clock.ConsumeCycle();
+        if (!shouldBranch)
             return 1;
 
         auto offset = GetDestinationOffset(opcode);
@@ -52,6 +55,8 @@ namespace avr {
             cpu.PC -= (offset & 0x3F);
         else
             cpu.PC += offset;
+
+        _clock.ConsumeCycle();
 
         return 2;
     }

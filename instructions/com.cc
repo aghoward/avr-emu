@@ -26,6 +26,7 @@ namespace avr {
         auto& rd = GetDestinationRegister(cpu, opcode);
         rd ^= 0xFFu;
         SetStatusRegisters(cpu, rd);
+        _clock.ConsumeCycle();
         return _cyclesConsumed;
     }
 

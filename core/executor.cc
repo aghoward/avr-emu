@@ -15,6 +15,7 @@ namespace avr {
         uint16_t value = 0u;
         value = memory[address];
         value |= static_cast<uint16_t>((memory[address+1] << 8) & 0xFF00u);
+        _clock.ConsumeCycle();
         return value;
     }
 

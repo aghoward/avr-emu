@@ -44,6 +44,7 @@ namespace avr {
             value -= cpu.SREG.C;
 
         SetStatusRegisters(cpu, rr, rd, value);
+        _clock.ConsumeCycle();
         return _cyclesConsumed;
     }
 

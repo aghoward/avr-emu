@@ -1,4 +1,5 @@
 #include "cdif/cdif.h"
+#include "core/iclock.h"
 #include "instructions/add.h"
 #include "instructions/adiw.h"
 #include "instructions/and.h"
@@ -20,20 +21,20 @@
 namespace avr {
     void InstructionModule::load(cdif::Container& ctx)
     {
-        ctx.bind<ADDInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<ADIWInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<ANDInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<ANDIInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<ASRInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<BCLRInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<BLDInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<BRBCInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<BREAKInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<BSTInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<CALLInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<CBIInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<COMInstruction>().as<InstructionExecutor>().build();
-        ctx.bind<CPInstruction>().as<InstructionExecutor>().build();
+        ctx.bind<ADDInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<ADIWInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<ANDInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<ANDIInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<ASRInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<BCLRInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<BLDInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<BRBCInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<BREAKInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<BSTInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<CALLInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<CBIInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<COMInstruction, IClock&>().as<InstructionExecutor>().build();
+        ctx.bind<CPInstruction, IClock&>().as<InstructionExecutor>().build();
         ctx.bind<NotImplementedInstruction>().as<InstructionExecutor>().build();
 
         ctx.bindList<std::unique_ptr<InstructionExecutor>,

@@ -27,6 +27,8 @@ namespace avr {
         else
             rd &= 0xFFu ^ static_cast<uint8_t>(0x1u << bitShift);
 
+        _clock.ConsumeCycle();
+
         return _cyclesConsumed;
     }
 

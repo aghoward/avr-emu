@@ -1,5 +1,6 @@
 #include "core/cpu.h"
 #include "core/memory.h"
+#include "core/noopclock.h"
 #include "instructions/bclr.h"
 #include "instructions/opcodes.h"
 
@@ -15,6 +16,7 @@ class BCLRInstructionTests : public ::testing::Test
 {
 
     protected:
+        NoopClock clock;
         BCLRInstruction subject;
         Memory memory;
         CPU cpu;
@@ -50,7 +52,7 @@ class BCLRInstructionTests : public ::testing::Test
 
     public:
         BCLRInstructionTests() :
-            subject(), memory(), cpu(memory)
+            clock(), subject(clock), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }

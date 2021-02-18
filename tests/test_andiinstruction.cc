@@ -1,5 +1,6 @@
 #include "core/cpu.h"
 #include "core/memory.h"
+#include "core/noopclock.h"
 #include "instructions/andi.h"
 #include "instructions/opcodes.h"
 
@@ -15,6 +16,7 @@ class ANDIInstructionTests : public ::testing::Test
 {
 
     protected:
+        NoopClock clock;
         ANDIInstruction subject;
         Memory memory;
         CPU cpu;
@@ -40,7 +42,7 @@ class ANDIInstructionTests : public ::testing::Test
 
     public:
         ANDIInstructionTests() :
-            subject(), memory(), cpu(memory)
+            clock(), subject(clock), memory(), cpu(memory)
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
