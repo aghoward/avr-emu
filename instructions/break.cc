@@ -12,7 +12,7 @@ namespace avr {
     bool BREAKInstruction::Matches(uint16_t opcode) const
     {
         auto op = static_cast<uint16_t>(OpCode::BREAK);
-        auto mask = static_cast<uint16_t>(OpCodeMast::BREAK);
+        auto mask = static_cast<uint16_t>(OpCodeMask::BREAK);
         return (opcode & mask) == op;
     }
 }

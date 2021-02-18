@@ -5,4 +5,5 @@
 *.so*
 **/obj/*
 **/lib/*
-tests/unittest
+tests/unittests
+avr-emu

@@ -17,6 +17,10 @@ namespace avr {
             const std::unique_ptr<InstructionExecutor>& GetExecutor(const uint16_t opcode) const;
 
         public:
+            Executor(std::vector<std::unique_ptr<InstructionExecutor>>&& executors)
+                : _executors(std::move(executors))
+            {}
+
             void Execute(CPU& cpu, Memory& memory, uint32_t cyclesRequested) const;
     };
 }
