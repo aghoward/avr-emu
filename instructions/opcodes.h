@@ -28,6 +28,11 @@ namespace avr {
         BRBC = 0xF400,
         BRBS = 0xF000,
         CALL = 0x940E,
+        CPSE = 0x1000,
+        JMP  = 0x940C,
+
+        // Read / Write
+        LDS  = 0x9000,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -57,5 +62,10 @@ namespace avr {
         BRBC = 0xFC00,
         BRBS = 0xFC00,
         CALL = 0xFE0E,
+        CPSE = 0xFC00,
+        JMP  = 0xFE0E,
+
+        // Read / Write
+        LDS  = 0xFE0F,
     };
 }

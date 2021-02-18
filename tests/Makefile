@@ -17,7 +17,8 @@ TEST_OBJS = ${OBJ_DIR}/test_addinstruction.o \
 			${OBJ_DIR}/test_callinstruction.o \
 			${OBJ_DIR}/test_cbiinstruction.o \
 			${OBJ_DIR}/test_cominstruction.o \
-			${OBJ_DIR}/test_cpinstruction.o
+			${OBJ_DIR}/test_cpinstruction.o \
+			${OBJ_DIR}/test_cpseinstruction.o
 
 all: ${OBJ_DIR} unittests
 
