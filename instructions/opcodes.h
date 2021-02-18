@@ -9,6 +9,7 @@ namespace avr {
         ASR  = 0x9C05,
         COM  = 0x9400,
         DEC  = 0x940A,
+        EOR  = 0x2400,
 
         // Logic
         AND  = 0x2000,
@@ -44,6 +45,7 @@ namespace avr {
         ASR  = 0xFE0F,
         COM  = 0xFE00,
         DEC  = 0xFE0F,
+        EOR  = 0xFC00,
 
         // Logic
         AND  = 0xFC00,
