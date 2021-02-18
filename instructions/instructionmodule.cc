@@ -21,21 +21,66 @@
 namespace avr {
     void InstructionModule::load(cdif::Container& ctx)
     {
-        ctx.bind<ADDInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<ADIWInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<ANDInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<ANDIInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<ASRInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<BCLRInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<BLDInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<BRBCInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<BREAKInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<BSTInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<CALLInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<CBIInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<COMInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<CPInstruction, IClock&>().as<InstructionExecutor>().build();
-        ctx.bind<NotImplementedInstruction>().as<InstructionExecutor>().build();
+        ctx.bind<ADDInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("ADD")
+            .build();
+        ctx.bind<ADIWInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("ADIW")
+            .build();
+        ctx.bind<ANDInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("AND")
+            .build();
+        ctx.bind<ANDIInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("ANDI")
+            .build();
+        ctx.bind<ASRInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("ASR")
+            .build();
+        ctx.bind<BCLRInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("BCLR")
+            .build();
+        ctx.bind<BLDInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("BLD")
+            .build();
+        ctx.bind<BRBCInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("BRBC")
+            .build();
+        ctx.bind<BREAKInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("BREAK")
+            .build();
+        ctx.bind<BSTInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("BST")
+            .build();
+        ctx.bind<CALLInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("CALL")
+            .build();
+        ctx.bind<CBIInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("CBI")
+            .build();
+        ctx.bind<COMInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("COM")
+            .build();
+        ctx.bind<CPInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("CPI")
+            .build();
+        ctx.bind<NotImplementedInstruction>()
+            .as<InstructionExecutor>()
+            .named("NotImplemented")
+            .build();
 
         ctx.bindList<std::unique_ptr<InstructionExecutor>,
                 std::unique_ptr<ADDInstruction>,
