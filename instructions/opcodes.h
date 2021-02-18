@@ -13,11 +13,12 @@ namespace avr {
         ANDI = 0x7000,
 
         // MISC
-        BCLR = 0x9488,
-        BSET = 0x9408,
-        BLD  = 0xF800,
-        BST  = 0xFA00,
+        BCLR  = 0x9488,
+        BSET  = 0x9408,
+        BLD   = 0xF800,
+        BST   = 0xFA00,
         BREAK = 0x9598,
+        CBI   = 0x9800,
 
         // Branching
         BRBC = 0xF400,
@@ -37,11 +38,12 @@ namespace avr {
         ANDI = 0xF000,
 
         // MISC
-        BCLR = 0xFF8F,
-        BSET = 0xFF8F,
-        BLD  = 0xFE08,
-        BST  = 0xFE08,
+        BCLR  = 0xFF8F,
+        BSET  = 0xFF8F,
+        BLD   = 0xFE08,
+        BST   = 0xFE08,
         BREAK = 0xFFFF,
+        CBI   = 0xFF00,
 
         // Branching
         BRBC = 0xFC00,
