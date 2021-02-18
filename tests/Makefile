@@ -13,7 +13,8 @@ TEST_OBJS = ${OBJ_DIR}/test_addinstruction.o \
 			${OBJ_DIR}/test_bclrinstruction.o \
 			${OBJ_DIR}/test_bldinstruction.o \
 			${OBJ_DIR}/test_brbcinstruction.o \
-			${OBJ_DIR}/test_bstinstruction.o
+			${OBJ_DIR}/test_bstinstruction.o \
+			${OBJ_DIR}/test_callinstruction.o
 
 all: ${OBJ_DIR} unittests
 

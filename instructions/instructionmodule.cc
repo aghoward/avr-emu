@@ -9,6 +9,7 @@
 #include "instructions/brbc.h"
 #include "instructions/break.h"
 #include "instructions/bst.h"
+#include "instructions/call.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
 #include "instructions/notimplemented.h"
@@ -26,6 +27,7 @@ namespace avr {
         ctx.bind<BRBCInstruction>().as<InstructionExecutor>().build();
         ctx.bind<BREAKInstruction>().as<InstructionExecutor>().build();
         ctx.bind<BSTInstruction>().as<InstructionExecutor>().build();
+        ctx.bind<CALLInstruction>().as<InstructionExecutor>().build();
         ctx.bind<NotImplementedInstruction>().as<InstructionExecutor>().build();
 
         ctx.bindList<std::unique_ptr<InstructionExecutor>,
@@ -39,6 +41,7 @@ namespace avr {
                 std::unique_ptr<BRBCInstruction>,
                 std::unique_ptr<BREAKInstruction>,
                 std::unique_ptr<BSTInstruction>,
+                std::unique_ptr<CALLInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

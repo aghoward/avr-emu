@@ -22,6 +22,7 @@ namespace avr {
         // Branching
         BRBC = 0xF400,
         BRBS = 0xF000,
+        CALL = 0x940E,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -45,5 +46,6 @@ namespace avr {
         // Branching
         BRBC = 0xFC00,
         BRBS = 0xFC00,
+        CALL = 0xFE0E,
     };
 }
