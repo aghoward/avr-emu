@@ -13,31 +13,36 @@ namespace avr {
     uint32_t BCLRInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
     {
         auto src = GetSource(opcode);
+        auto flagValue = (opcode & 0x0080u) == 0u;
 
         if (src == 0u)
-            cpu.SREG.C = 0;
+            cpu.SREG.C = flagValue;
         else if (src == 1u)
-            cpu.SREG.Z = 0;
+            cpu.SREG.Z = flagValue;
         else if (src == 2u)
-            cpu.SREG.N = 0;
+            cpu.SREG.N = flagValue;
         else if (src == 3u)
-            cpu.SREG.V = 0;
+            cpu.SREG.V = flagValue;
         else if (src == 4u)
-            cpu.SREG.S = 0;
+            cpu.SREG.S = flagValue;
         else if (src == 5u)
-            cpu.SREG.H = 0;
+            cpu.SREG.H = flagValue;
         else if (src == 6u)
-            cpu.SREG.T = 0;
+            cpu.SREG.T = flagValue;
         else if (src == 7u)
-            cpu.SREG.I = 0;
+            cpu.SREG.I = flagValue;
 
         return _cyclesConsumed;
     }
 
+    bool BCLRInstruction::Matches(OpCode op, OpCodeMask mask, uint16_t opcode) const
+    {
+        return (opcode & static_cast<uint16_t>(mask)) == static_cast<uint16_t>(op);
+    }
+
     bool BCLRInstruction::Matches(uint16_t opcode) const
     {
-        const auto op = static_cast<uint16_t>(OpCode::BCLR);
-        auto mask = static_cast<uint16_t>(OpCodeMask::BCLR);
-        return (opcode & mask) == op;
+        return Matches(OpCode::BCLR, OpCodeMask::BCLR, opcode) ||
+            Matches(OpCode::BSET, OpCodeMask::BSET, opcode);
     }
 }

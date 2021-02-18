@@ -19,13 +19,13 @@ class BCLRInstructionTests : public ::testing::Test
         CPU cpu;
         Memory memory;
 
-        uint16_t GetOpCode(uint8_t src) const
+        uint16_t GetOpCode(OpCode opcode, uint8_t src) const
         {
             auto srcValue = static_cast<uint16_t>((src << 4) & 0x0070);
-            return static_cast<uint16_t>(OpCode::BCLR) | srcValue;
+            return static_cast<uint16_t>(opcode) | srcValue;
         }
 
-        void SetAllFlags()
+        void SetAllFlags(bool value)
         {
             cpu.SREG.C = 
                 cpu.SREG.Z = 
@@ -35,7 +35,17 @@ class BCLRInstructionTests : public ::testing::Test
                 cpu.SREG.H = 
                 cpu.SREG.T = 
                 cpu.SREG.I =
-                1;
+                value;
+        }
+
+        void SetAllFlags()
+        {
+            SetAllFlags(true);
+        }
+
+        void ClearAllFlags()
+        {
+            SetAllFlags(false);
         }
 
     public:
@@ -58,9 +68,15 @@ TEST_F(BCLRInstructionTests, Matches_GivenBCLROpCode_ReturnsTrue)
     ASSERT_TRUE(subject.Matches(opcode));
 }
 
-TEST_F(BCLRInstructionTests, Execute_GivenZero_ClearsCarryFlag)
+TEST_F(BCLRInstructionTests, Matches_GivenBSETOpCode_ReturnsTrue)
 {
-    auto opcode = GetOpCode(0u);
+    auto opcode = static_cast<uint16_t>(OpCode::BSET);
+    ASSERT_TRUE(subject.Matches(opcode));
+}
+
+TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenZero_ClearsCarryFlag)
+{
+    auto opcode = GetOpCode(OpCode::BCLR, 0u);
     SetAllFlags();
 
     subject.Execute(opcode, cpu, memory);
@@ -75,9 +91,9 @@ TEST_F(BCLRInstructionTests, Execute_GivenZero_ClearsCarryFlag)
     ASSERT_TRUE(cpu.SREG.I);
 }
 
-TEST_F(BCLRInstructionTests, Execute_GivenOne_ClearsZeroFlag)
+TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenOne_ClearsZeroFlag)
 {
-    auto opcode = GetOpCode(1u);
+    auto opcode = GetOpCode(OpCode::BCLR, 1u);
     SetAllFlags();
 
     subject.Execute(opcode, cpu, memory);
@@ -92,9 +108,9 @@ TEST_F(BCLRInstructionTests, Execute_GivenOne_ClearsZeroFlag)
     ASSERT_TRUE(cpu.SREG.I);
 }
 
-TEST_F(BCLRInstructionTests, Execute_GivenTwo_ClearsNegativeFlag)
+TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenTwo_ClearsNegativeFlag)
 {
-    auto opcode = GetOpCode(2u);
+    auto opcode = GetOpCode(OpCode::BCLR, 2u);
     SetAllFlags();
 
     subject.Execute(opcode, cpu, memory);
@@ -109,9 +125,9 @@ TEST_F(BCLRInstructionTests, Execute_GivenTwo_ClearsNegativeFlag)
     ASSERT_TRUE(cpu.SREG.I);
 }
 
-TEST_F(BCLRInstructionTests, Execute_GivenThree_ClearsOverflowFlag)
+TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenThree_ClearsOverflowFlag)
 {
-    auto opcode = GetOpCode(3u);
+    auto opcode = GetOpCode(OpCode::BCLR, 3u);
     SetAllFlags();
 
     subject.Execute(opcode, cpu, memory);
@@ -126,9 +142,9 @@ TEST_F(BCLRInstructionTests, Execute_GivenThree_ClearsOverflowFlag)
     ASSERT_TRUE(cpu.SREG.I);
 }
 
-TEST_F(BCLRInstructionTests, Execute_GivenFour_ClearsSignFlag)
+TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenFour_ClearsSignFlag)
 {
-    auto opcode = GetOpCode(4u);
+    auto opcode = GetOpCode(OpCode::BCLR, 4u);
     SetAllFlags();
 
     subject.Execute(opcode, cpu, memory);
@@ -143,9 +159,9 @@ TEST_F(BCLRInstructionTests, Execute_GivenFour_ClearsSignFlag)
     ASSERT_TRUE(cpu.SREG.I);
 }
 
-TEST_F(BCLRInstructionTests, Execute_GivenFive_ClearsHalfCarryFlag)
+TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenFive_ClearsHalfCarryFlag)
 {
-    auto opcode = GetOpCode(5u);
+    auto opcode = GetOpCode(OpCode::BCLR, 5u);
     SetAllFlags();
 
     subject.Execute(opcode, cpu, memory);
@@ -160,9 +176,9 @@ TEST_F(BCLRInstructionTests, Execute_GivenFive_ClearsHalfCarryFlag)
     ASSERT_TRUE(cpu.SREG.I);
 }
 
-TEST_F(BCLRInstructionTests, Execute_GivenSix_ClearsBitCopyFlag)
+TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenSix_ClearsBitCopyFlag)
 {
-    auto opcode = GetOpCode(6u);
+    auto opcode = GetOpCode(OpCode::BCLR, 6u);
     SetAllFlags();
 
     subject.Execute(opcode, cpu, memory);
@@ -177,9 +193,9 @@ TEST_F(BCLRInstructionTests, Execute_GivenSix_ClearsBitCopyFlag)
     ASSERT_TRUE(cpu.SREG.I);
 }
 
-TEST_F(BCLRInstructionTests, Execute_GivenSeven_ClearsInterruptFlag)
+TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenSeven_ClearsInterruptFlag)
 {
-    auto opcode = GetOpCode(7u);
+    auto opcode = GetOpCode(OpCode::BCLR, 7u);
     SetAllFlags();
 
     subject.Execute(opcode, cpu, memory);
@@ -193,3 +209,140 @@ TEST_F(BCLRInstructionTests, Execute_GivenSeven_ClearsInterruptFlag)
     ASSERT_TRUE(cpu.SREG.T);
     ASSERT_FALSE(cpu.SREG.I);
 }
+
+TEST_F(BCLRInstructionTests, ExecuteBSET_GivenZero_SetsCarryFlag)
+{
+    auto opcode = GetOpCode(OpCode::BSET, 0u);
+    ClearAllFlags();
+
+    subject.Execute(opcode, cpu, memory);
+
+    ASSERT_TRUE(cpu.SREG.C);
+    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(cpu.SREG.N);
+    ASSERT_FALSE(cpu.SREG.V);
+    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_FALSE(cpu.SREG.H);
+    ASSERT_FALSE(cpu.SREG.T);
+    ASSERT_FALSE(cpu.SREG.I);
+}
+
+TEST_F(BCLRInstructionTests, ExecuteBSET_GivenOne_SetsZeroFlag)
+{
+    auto opcode = GetOpCode(OpCode::BSET, 1u);
+    ClearAllFlags();
+
+    subject.Execute(opcode, cpu, memory);
+
+    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_TRUE(cpu.SREG.Z);
+    ASSERT_FALSE(cpu.SREG.N);
+    ASSERT_FALSE(cpu.SREG.V);
+    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_FALSE(cpu.SREG.H);
+    ASSERT_FALSE(cpu.SREG.T);
+    ASSERT_FALSE(cpu.SREG.I);
+}
+
+TEST_F(BCLRInstructionTests, ExecuteBSET_GivenTwo_SetsNegativeFlag)
+{
+    auto opcode = GetOpCode(OpCode::BSET, 2u);
+    ClearAllFlags();
+
+    subject.Execute(opcode, cpu, memory);
+
+    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_TRUE(cpu.SREG.N);
+    ASSERT_FALSE(cpu.SREG.V);
+    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_FALSE(cpu.SREG.H);
+    ASSERT_FALSE(cpu.SREG.T);
+    ASSERT_FALSE(cpu.SREG.I);
+}
+
+TEST_F(BCLRInstructionTests, ExecuteBSET_GivenThree_SetsOverflowFlag)
+{
+    auto opcode = GetOpCode(OpCode::BSET, 3u);
+    ClearAllFlags();
+
+    subject.Execute(opcode, cpu, memory);
+
+    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(cpu.SREG.N);
+    ASSERT_TRUE(cpu.SREG.V);
+    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_FALSE(cpu.SREG.H);
+    ASSERT_FALSE(cpu.SREG.T);
+    ASSERT_FALSE(cpu.SREG.I);
+}
+
+TEST_F(BCLRInstructionTests, ExecuteBSET_GivenFour_SetsSignFlag)
+{
+    auto opcode = GetOpCode(OpCode::BSET, 4u);
+    ClearAllFlags();
+
+    subject.Execute(opcode, cpu, memory);
+
+    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(cpu.SREG.N);
+    ASSERT_FALSE(cpu.SREG.V);
+    ASSERT_TRUE(cpu.SREG.S);
+    ASSERT_FALSE(cpu.SREG.H);
+    ASSERT_FALSE(cpu.SREG.T);
+    ASSERT_FALSE(cpu.SREG.I);
+}
+
+TEST_F(BCLRInstructionTests, ExecuteBSET_GivenFive_SetsHalfCarryFlag)
+{
+    auto opcode = GetOpCode(OpCode::BSET, 5u);
+    ClearAllFlags();
+
+    subject.Execute(opcode, cpu, memory);
+
+    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(cpu.SREG.N);
+    ASSERT_FALSE(cpu.SREG.V);
+    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_TRUE(cpu.SREG.H);
+    ASSERT_FALSE(cpu.SREG.T);
+    ASSERT_FALSE(cpu.SREG.I);
+}
+
+TEST_F(BCLRInstructionTests, ExecuteBSET_GivenSix_SetsBitCopyFlag)
+{
+    auto opcode = GetOpCode(OpCode::BSET, 6u);
+    ClearAllFlags();
+
+    subject.Execute(opcode, cpu, memory);
+
+    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(cpu.SREG.N);
+    ASSERT_FALSE(cpu.SREG.V);
+    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_FALSE(cpu.SREG.H);
+    ASSERT_TRUE(cpu.SREG.T);
+    ASSERT_FALSE(cpu.SREG.I);
+}
+
+TEST_F(BCLRInstructionTests, ExecuteBSET_GivenSeven_SetsInterruptFlag)
+{
+    auto opcode = GetOpCode(OpCode::BSET, 7u);
+    ClearAllFlags();
+
+    subject.Execute(opcode, cpu, memory);
+
+    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(cpu.SREG.N);
+    ASSERT_FALSE(cpu.SREG.V);
+    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_FALSE(cpu.SREG.H);
+    ASSERT_FALSE(cpu.SREG.T);
+    ASSERT_TRUE(cpu.SREG.I);
+}
+

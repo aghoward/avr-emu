@@ -14,6 +14,7 @@ namespace avr {
 
         // MISC
         BCLR = 0x9488,
+        BSET = 0x9408,
         BLD  = 0xF800,
         BREAK = 0x9598,
 
@@ -35,6 +36,7 @@ namespace avr {
 
         // MISC
         BCLR = 0xFF8F,
+        BSET = 0xFF8F,
         BLD  = 0xFE08,
         BREAK = 0xFFFF,
 
