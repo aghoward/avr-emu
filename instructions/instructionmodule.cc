@@ -14,6 +14,7 @@
 #include "instructions/cbi.h"
 #include "instructions/com.h"
 #include "instructions/cp.h"
+#include "instructions/cpi.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
 #include "instructions/notimplemented.h"
@@ -77,6 +78,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("CPI")
             .build();
+        ctx.bind<CPInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("CP")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -96,6 +101,7 @@ namespace avr {
                 std::unique_ptr<CALLInstruction>,
                 std::unique_ptr<CBIInstruction>,
                 std::unique_ptr<COMInstruction>,
+                std::unique_ptr<CPIInstruction>,
                 std::unique_ptr<CPInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
