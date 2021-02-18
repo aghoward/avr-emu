@@ -17,6 +17,7 @@ OBJECTS =${OBJ_DIR}/notimplemented.o \
 		 ${OBJ_DIR}/bst.o \
 		 ${OBJ_DIR}/call.o \
 		 ${OBJ_DIR}/cbi.o \
+		 ${OBJ_DIR}/com.o \
 		 ${OBJ_DIR}/instructionmodule.o
 
 LIB_DIR =../lib
