@@ -12,6 +12,7 @@
 #include "instructions/call.h"
 #include "instructions/cbi.h"
 #include "instructions/com.h"
+#include "instructions/cp.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
 #include "instructions/notimplemented.h"
@@ -32,6 +33,7 @@ namespace avr {
         ctx.bind<CALLInstruction>().as<InstructionExecutor>().build();
         ctx.bind<CBIInstruction>().as<InstructionExecutor>().build();
         ctx.bind<COMInstruction>().as<InstructionExecutor>().build();
+        ctx.bind<CPInstruction>().as<InstructionExecutor>().build();
         ctx.bind<NotImplementedInstruction>().as<InstructionExecutor>().build();
 
         ctx.bindList<std::unique_ptr<InstructionExecutor>,
@@ -48,6 +50,7 @@ namespace avr {
                 std::unique_ptr<CALLInstruction>,
                 std::unique_ptr<CBIInstruction>,
                 std::unique_ptr<COMInstruction>,
+                std::unique_ptr<CPInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

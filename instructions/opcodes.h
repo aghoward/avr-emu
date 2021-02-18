@@ -20,6 +20,8 @@ namespace avr {
         BST   = 0xFA00,
         BREAK = 0x9598,
         CBI   = 0x9800,
+        CP    = 0x1400,
+        CPC   = 0x0400,
 
         // Branching
         BRBC = 0xF400,
@@ -46,6 +48,8 @@ namespace avr {
         BST   = 0xFE08,
         BREAK = 0xFFFF,
         CBI   = 0xFF00,
+        CP    = 0xFC00,
+        CPC   = 0xFC00,
 
         // Branching
         BRBC = 0xFC00,
