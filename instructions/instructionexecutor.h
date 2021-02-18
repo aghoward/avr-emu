@@ -1,7 +1,7 @@
 #pragma once
 
-#include "cpu.h"
-#include "memory.h"
+#include "core/cpu.h"
+#include "core/memory.h"
 
 #include <cstdint>
 

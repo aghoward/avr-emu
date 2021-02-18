@@ -1,7 +1,7 @@
-#include "cpu.h"
+#include "core/cpu.h"
+#include "core/memory.h"
 #include "instructions/bclr.h"
 #include "instructions/opcodes.h"
-#include "memory.h"
 
 #include <gtest/gtest.h>
 

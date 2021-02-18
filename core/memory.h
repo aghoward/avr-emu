@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef AVR_EMU_RAM_SIZE
-#define AVR_EMU_RAM_SIZE 256*1024
+#define AVR_EMU_RAM_SIZE 64u*1024u - 1u
 #endif
 
 #include <cstdint>

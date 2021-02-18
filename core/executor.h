@@ -1,8 +1,8 @@
 #pragma once
 
-#include "cpu.h"
+#include "core/cpu.h"
+#include "core/memory.h"
 #include "instructions/instructionexecutor.h"
-#include "memory.h"
 
 #include <cstdint>
 #include <memory>

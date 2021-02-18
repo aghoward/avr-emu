@@ -4,7 +4,7 @@ LD_FLAGS = -lgtest_main -lgtest
 
 LIB_DIR = ../lib
 OBJ_DIR = ./obj
-LIBRARIES = ${LIB_DIR}/libinstructions.a
+LIBRARIES = ${LIB_DIR}/libinstructions.a ${LIB_DIR}/libcore.a
 TEST_OBJS = ${OBJ_DIR}/test_addinstruction.o \
 			${OBJ_DIR}/test_adiwinstruction.o \
 			${OBJ_DIR}/test_andinstruction.o \

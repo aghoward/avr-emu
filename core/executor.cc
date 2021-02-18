@@ -1,8 +1,7 @@
-#include "executor.h"
-
-#include "cpu.h"
+#include "core/cpu.h"
+#include "core/executor.h"
+#include "core/memory.h"
 #include "instructions/instructionexecutor.h"
-#include "memory.h"
 
 #include <algorithm>
 #include <cstdint>

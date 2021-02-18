@@ -1,9 +1,9 @@
 #include "cdif/cdif.h"
-#include "cpu.h"
-#include "executor.h"
+#include "core/cpu.h"
+#include "core/executor.h"
+#include "core/memory.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
-#include "memory.h"
 
 #include <memory>
 #include <vector>

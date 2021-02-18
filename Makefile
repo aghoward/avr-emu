@@ -3,9 +3,9 @@ CXX_FLAGS += --std=c++17 -I./ -I./cdif -Wall -Wextra -Wshadow -Wnon-virtual-dtor
 LD_FLAGS +=-lpthread
 
 OBJ_DIR =./obj
-OBJECTS =${OBJ_DIR}/memory.o ${OBJ_DIR}/executor.o
+OBJECTS =
 LIB_DIR =./lib
-LIBRARIES =./lib/libinstructions.a
+LIBRARIES =./lib/libinstructions.a ./lib/libcore.a
 
 all: ${LIB_DIR} ${OBJ_DIR} avr-emu
 
