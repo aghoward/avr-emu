@@ -16,6 +16,7 @@ namespace avr {
         BCLR = 0x9488,
         BSET = 0x9408,
         BLD  = 0xF800,
+        BST  = 0xFA00,
         BREAK = 0x9598,
 
         // Branching
@@ -38,6 +39,7 @@ namespace avr {
         BCLR = 0xFF8F,
         BSET = 0xFF8F,
         BLD  = 0xFE08,
+        BST  = 0xFE08,
         BREAK = 0xFFFF,
 
         // Branching

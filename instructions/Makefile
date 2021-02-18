@@ -12,7 +12,8 @@ OBJECTS =${OBJ_DIR}/notimplemented.o \
 		 ${OBJ_DIR}/asr.o \
 		 ${OBJ_DIR}/bclr.o \
 		 ${OBJ_DIR}/bld.o \
-		 ${OBJ_DIR}/brbc.o
+		 ${OBJ_DIR}/brbc.o \
+		 ${OBJ_DIR}/bst.o
 
 LIB_DIR =../lib
 LIBRARIES =${LIB_DIR}/libinstructions.a

@@ -1,5 +1,5 @@
 #include "cpu.h"
-#include "instructions/bld.h"
+#include "instructions/bst.h"
 #include "instructions/opcodes.h"
 #include "memory.h"
 
@@ -11,11 +11,11 @@
 
 using namespace avr;
 
-class BLDInstructionTests : public ::testing::Test
+class BSTInstructionTests : public ::testing::Test
 {
 
     protected:
-        BLDInstruction subject;
+        BSTInstruction subject;
         CPU cpu;
         Memory memory;
 
@@ -23,7 +23,7 @@ class BLDInstructionTests : public ::testing::Test
         {
             auto srcValue = static_cast<uint16_t>(src & 0x07u);
             auto dstValue = static_cast<uint16_t>((dst & 0x1Fu) << 4u);
-            return static_cast<uint16_t>(OpCode::BLD) | srcValue | dstValue;
+            return static_cast<uint16_t>(OpCode::BST) | srcValue | dstValue;
         }
 
         std::tuple<uint16_t, uint8_t, uint8_t> GetRegisters()
@@ -35,43 +35,43 @@ class BLDInstructionTests : public ::testing::Test
         }
 
     public:
-        BLDInstructionTests() :
+        BSTInstructionTests() :
             subject(), cpu(), memory()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
 };
 
-TEST_F(BLDInstructionTests, Matches_GivenIncorrectOpCode_ReturnsFalse)
+TEST_F(BSTInstructionTests, Matches_GivenIncorrectOpCode_ReturnsFalse)
 {
     auto opcode = static_cast<uint16_t>(0x1000);
     ASSERT_FALSE(subject.Matches(opcode));
 }
 
-TEST_F(BLDInstructionTests, Matches_GivenBLDOpCode_ReturnsTrue)
+TEST_F(BSTInstructionTests, Matches_GivenBSTOpCode_ReturnsTrue)
 {
-    auto opcode = static_cast<uint16_t>(OpCode::BLD);
+    auto opcode = static_cast<uint16_t>(OpCode::BST);
     ASSERT_TRUE(subject.Matches(opcode));
 }
 
-TEST_F(BLDInstructionTests, Execute_GivenFlagSet_SetsBitInDestination)
+TEST_F(BSTInstructionTests, Execute_GivenBitClear_ClearsBit)
 {
     auto [opcode, src, dst] = GetRegisters();
+    cpu.R[dst] = 0xFFu ^ static_cast<uint8_t>(0x1u << src);
     cpu.SREG.T = true;
-    cpu.R[dst] &= 0xFFu ^ static_cast<uint8_t>(0x1u << src);
 
     subject.Execute(opcode, cpu, memory);
 
-    ASSERT_NE(cpu.R[dst] & (0x1u << src), 0x0u);
+    ASSERT_FALSE(cpu.SREG.T);
 }
 
-TEST_F(BLDInstructionTests, Execute_GivenFlagClear_ClearsBitInDestination)
+TEST_F(BSTInstructionTests, Execute_GivenBitSet_SetsBit)
 {
     auto [opcode, src, dst] = GetRegisters();
+    cpu.R[dst] = static_cast<uint8_t>(0x1u << src);
     cpu.SREG.T = false;
-    cpu.R[dst] |= static_cast<uint8_t>(0x1u << src);
 
     subject.Execute(opcode, cpu, memory);
 
-    ASSERT_EQ(cpu.R[dst] & (0x1u << src), 0x0u);
+    ASSERT_TRUE(cpu.SREG.T);
 }
