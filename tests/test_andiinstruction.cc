@@ -18,7 +18,7 @@ class ANDIInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         ANDIInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const

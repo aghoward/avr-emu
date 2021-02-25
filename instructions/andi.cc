@@ -26,7 +26,7 @@ namespace avr {
         cpu.SREG.Z = result == 0;
     }
 
-    uint32_t ANDIInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t ANDIInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto src = GetSourceValue(opcode);
         auto& dst = GetDestinationRegister(cpu, opcode);

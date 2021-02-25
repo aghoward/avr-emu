@@ -34,7 +34,7 @@ namespace avr {
             || ((result & 0x08) && !(rd & 0x08u));
     }
 
-    uint32_t CPInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t CPInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto& rd = GetDestinationRegister(cpu, opcode);
         auto& rr = GetSourceRegister(cpu, opcode);

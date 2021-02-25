@@ -20,7 +20,7 @@ namespace avr {
         cpu.SREG.S = cpu.SREG.V ^ cpu.SREG.N;
     }
 
-    uint32_t ASRInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t ASRInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto& rd = GetDestinationRegister(cpu, opcode);
         bool signBit = (rd & 0x80) != 0u;

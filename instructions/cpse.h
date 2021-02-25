@@ -14,7 +14,7 @@ namespace avr {
             uint8_t& GetSourceRegister(CPU& cpu, uint16_t opcode) const;
             uint8_t& GetDestinationRegister(CPU& cpu, uint16_t opcode) const;
 
-            uint16_t GetNextOpCode(const CPU& cpu, const Memory& mem) const;
+            uint16_t GetNextOpCode(const CPU& cpu, const SRAM& mem) const;
             uint16_t GetOpCodeSize(uint16_t opcode) const;
 
         public:
@@ -22,7 +22,7 @@ namespace avr {
                 : _clock(clock)
             {}
 
-            uint32_t Execute(uint16_t opcode, CPU& cpu, Memory& memory) const override;
+            uint32_t Execute(uint16_t opcode, CPU& cpu, SRAM& memory) const override;
             bool Matches(uint16_t opcode) const override;
     };
 }

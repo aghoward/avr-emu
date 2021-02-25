@@ -21,7 +21,7 @@ namespace avr {
 
     }
 
-    uint32_t COMInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t COMInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto& rd = GetDestinationRegister(cpu, opcode);
         rd ^= 0xFFu;

@@ -28,7 +28,7 @@ namespace avr {
         cpu.SREG.C = !(result & 0x8000) && (rdh & 0x80); 
     }
 
-    uint32_t ADIWInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t ADIWInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto src = GetSourceValue(opcode);
         auto dstIndex = GetDestinationRegister(opcode);

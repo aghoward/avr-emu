@@ -19,7 +19,7 @@ namespace avr {
         cpu.SREG.S = cpu.SREG.N ^ cpu.SREG.V;
     }
 
-    uint32_t DECInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t DECInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto& rd = GetDestinationRegister(cpu, opcode);
 

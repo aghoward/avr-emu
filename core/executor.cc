@@ -10,7 +10,7 @@
 #include <vector>
 
 namespace avr {
-    uint16_t Executor::FetchWord(const Memory& memory, const uint16_t address) const
+    uint16_t Executor::FetchWord(const ProgramMemory& memory, const uint16_t address) const
     {
         uint16_t value = 0u;
         value = memory[address];
@@ -29,16 +29,16 @@ namespace avr {
         return *it;
     }
 
-    void Executor::Execute(CPU& cpu, Memory& memory, uint32_t cyclesRequested) const {
+    void Executor::Execute(CPU& cpu, ProgramMemory& progMem, SRAM& sram, uint32_t cyclesRequested) const {
         using namespace std::string_literals;
         auto cyclesConsumed = 0u;
 
         while (cyclesConsumed < cyclesRequested)
         {
-            auto opcode = FetchWord(memory, cpu.PC);
+            auto opcode = FetchWord(progMem, cpu.PC);
             cpu.PC += sizeof(cpu.PC);
             const auto& instruction_executor = GetExecutor(opcode);
-            cyclesConsumed += instruction_executor->Execute(opcode, cpu, memory);
+            cyclesConsumed += instruction_executor->Execute(opcode, cpu, sram);
         }
     }
 }

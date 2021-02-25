@@ -18,7 +18,7 @@ class ADIWInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         ADIWInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dstIndex) const

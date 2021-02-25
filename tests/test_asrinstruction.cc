@@ -18,7 +18,7 @@ class ASRInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         ASRInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(uint8_t dst) const

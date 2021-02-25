@@ -41,7 +41,7 @@ namespace avr {
         return cpu.SREG.I == branchIfSet;
     }
 
-    uint32_t BRBCInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t BRBCInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto flagIndex = GetSourceValue(opcode);
 

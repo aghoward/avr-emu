@@ -4,7 +4,7 @@
 #include <cstdint>
 
 namespace avr {
-    void CALLInstruction::PushReturnAddress(CPU& cpu, Memory& mem) const
+    void CALLInstruction::PushReturnAddress(CPU& cpu, SRAM& mem) const
     {
         uint16_t returnAddress = cpu.PC + static_cast<uint16_t>(sizeof(cpu.PC));
         for (uint16_t i = 0u; i < sizeof(cpu.PC); i++)
@@ -14,7 +14,7 @@ namespace avr {
         }
     }
 
-    uint16_t CALLInstruction::GetDestinationAddress(CPU& cpu, Memory& mem) const
+    uint16_t CALLInstruction::GetDestinationAddress(CPU& cpu, SRAM& mem) const
     {
         auto address = static_cast<uint16_t>(0u);
         for (auto i = 0u; i < sizeof(address); i++)
@@ -24,7 +24,7 @@ namespace avr {
         return (address << 1u);
     }
 
-    uint32_t CALLInstruction::Execute(uint16_t, CPU& cpu, Memory& mem) const
+    uint32_t CALLInstruction::Execute(uint16_t, CPU& cpu, SRAM& mem) const
     {
         PushReturnAddress(cpu, mem);
         cpu.PC = GetDestinationAddress(cpu, mem);

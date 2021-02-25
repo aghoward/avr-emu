@@ -17,7 +17,7 @@ class CPIInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         CPIInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(OpCode opcode, uint8_t k, uint8_t dst) const

@@ -10,7 +10,7 @@ namespace avr {
         return static_cast<uint8_t>((opcode >> 4) & (mask >> 4));
     }
 
-    uint32_t BCLRInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t BCLRInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto src = GetSource(opcode);
         auto flagValue = (opcode & 0x0080u) == 0u;

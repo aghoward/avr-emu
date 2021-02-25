@@ -15,7 +15,7 @@ namespace avr {
             IClock& _clock;
             std::vector<std::unique_ptr<InstructionExecutor>> _executors;
 
-            uint16_t FetchWord(const Memory& memory, const uint16_t address) const;
+            uint16_t FetchWord(const ProgramMemory& progMem, const uint16_t address) const;
             const std::unique_ptr<InstructionExecutor>& GetExecutor(const uint16_t opcode) const;
 
         public:
@@ -26,6 +26,6 @@ namespace avr {
                   _executors(std::move(executors))
             {}
 
-            void Execute(CPU& cpu, Memory& memory, uint32_t cyclesRequested) const;
+            void Execute(CPU& cpu, ProgramMemory& progMem, SRAM& sram, uint32_t cyclesRequested) const;
     };
 }

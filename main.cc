@@ -19,8 +19,9 @@ int main()
 {
     auto container = BuildContainer();
     auto& cpu = container.resolve<CPU&>();
-    auto& memory = container.resolve<Memory&>();
+    auto& progMem = container.resolve<ProgramMemory&>();
+    auto& sram = container.resolve<SRAM&>();
     auto executor = container.resolve<Executor>();
-    executor.Execute(cpu, memory, 10);
+    executor.Execute(cpu, progMem, sram, 10);
     return 0;
 }

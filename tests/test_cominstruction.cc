@@ -17,7 +17,7 @@ class COMInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         COMInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(uint8_t dst) const

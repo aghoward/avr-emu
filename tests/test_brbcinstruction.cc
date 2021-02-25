@@ -16,7 +16,7 @@ class BRBCInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         BRBCInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(OpCode opcode, uint8_t src, int16_t dst) const

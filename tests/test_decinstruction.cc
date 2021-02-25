@@ -17,7 +17,7 @@ class DECInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         DECInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(uint8_t dst) const

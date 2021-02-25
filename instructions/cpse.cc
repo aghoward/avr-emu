@@ -20,7 +20,7 @@ namespace avr {
         return cpu.R[index];
     }
 
-    uint16_t CPSEInstruction::GetNextOpCode(const CPU& cpu, const Memory& mem) const
+    uint16_t CPSEInstruction::GetNextOpCode(const CPU& cpu, const SRAM& mem) const
     {
         auto pc = cpu.PC;
         auto opcode = static_cast<uint16_t>(0u);
@@ -49,7 +49,7 @@ namespace avr {
         return (it == std::end(twoWordOpCodes)) ? 1u : 2u;
     }
 
-    uint32_t CPSEInstruction::Execute(uint16_t opcode, CPU& cpu, Memory& mem) const
+    uint32_t CPSEInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM& mem) const
     {
         auto& rr = GetSourceRegister(cpu, opcode);
         auto& rd = GetDestinationRegister(cpu, opcode);

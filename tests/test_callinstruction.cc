@@ -16,7 +16,7 @@ class CALLInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         CALLInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
@@ -30,8 +30,7 @@ class CALLInstructionTests : public ::testing::Test
         {
             auto pc = static_cast<uint16_t>(
                     static_cast<uint16_t>(rand()) %
-                    (static_cast<uint16_t>(AVR_EMU_RAM_SIZE) - 2u)
-                    + cpu.SRAM_BEG);
+                    (static_cast<uint16_t>(AVR_EMU_FLASH_SIZE) - 2u));
             cpu.PC = pc;
             auto shiftedAddress = static_cast<uint16_t>(address >> 1u);
             for (auto i = static_cast<uint16_t>(0u); i < sizeof(shiftedAddress); i++)
@@ -80,7 +79,7 @@ TEST_F(CALLInstructionTests, Execute_LongJumpsToOperand)
 {
     auto opcode = static_cast<uint16_t>(OpCode::CALL);
     auto address = static_cast<uint16_t>(
-            static_cast<uint16_t>(rand()) % static_cast<uint16_t>(AVR_EMU_RAM_SIZE) & 0xFFFEu);
+            static_cast<uint16_t>(rand()) % static_cast<uint16_t>(AVR_EMU_FLASH_SIZE) & 0xFFFEu);
     SetAddressOperand(address);
     auto originalSP = InitializeSP();
     auto expectedReturnAddress = cpu.PC + static_cast<uint16_t>(sizeof(cpu.PC));

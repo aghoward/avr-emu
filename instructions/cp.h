@@ -22,7 +22,7 @@ namespace avr {
                 : _clock(clock)
             {}
 
-            uint32_t Execute(uint16_t opcode, CPU& cpu, Memory& memory) const override;
+            uint32_t Execute(uint16_t opcode, CPU& cpu, SRAM& memory) const override;
             bool Matches(uint16_t opcode) const override;
     };
 }

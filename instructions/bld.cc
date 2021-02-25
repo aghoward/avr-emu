@@ -17,7 +17,7 @@ namespace avr {
         return cpu.R[value];
     }
 
-    uint32_t BLDInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t BLDInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto bitShift = GetSourceValue(opcode);
         auto& rd = GetDestinationRegister(cpu, opcode);

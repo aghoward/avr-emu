@@ -16,7 +16,7 @@ namespace avr {
         return static_cast<uint8_t>(opcode & 0x7u);
     }
 
-    uint32_t CBIInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t CBIInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto& rd = GetDestinationRegister(cpu, opcode);
         auto src = GetSourceBit(opcode);

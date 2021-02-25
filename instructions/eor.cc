@@ -26,7 +26,7 @@ namespace avr {
         cpu.SREG.S = cpu.SREG.N ^ cpu.SREG.V;
     }
 
-    uint32_t EORInstruction::Execute(uint16_t opcode, CPU& cpu, Memory&) const
+    uint32_t EORInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
     {
         auto& rr = GetSourceRegister(cpu, opcode);
         auto& rd = GetDestinationRegister(cpu, opcode);

@@ -18,7 +18,7 @@ class BCLRInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         BCLRInstruction subject;
-        Memory memory;
+        SRAM memory;
         CPU cpu;
 
         uint16_t GetOpCode(OpCode opcode, uint8_t src) const
