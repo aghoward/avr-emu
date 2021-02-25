@@ -25,6 +25,7 @@
 #include "instructions/inc.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
+#include "instructions/jmp.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -122,6 +123,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("INC")
             .build();
+        ctx.bind<JMPInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("JMP")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -151,6 +156,7 @@ namespace avr {
                 std::unique_ptr<IJMPInstruction>,
                 std::unique_ptr<INInstruction>,
                 std::unique_ptr<INCInstruction>,
+                std::unique_ptr<JMPInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }
