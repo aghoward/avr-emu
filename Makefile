@@ -22,12 +22,12 @@ ${OBJ_DIR}/%.o: %.cc %.h
 	$(CC) ${CXX_FLAGS} -c -o $@ $<
 
 ${LIB_DIR}/lib%.a: ./%
-	make -C $<
+	make ${MAKEFLAGS} -C $<
 
 tests: ./tests/*.cc ${LIB_DIR} ${LIBRARIES}
-	make -C tests
+	make ${MAKEFLAGS} -C tests
 
 clean:
-	make -C instructions clean
-	make -C tests clean
+	make ${MAKEFLAGS} -C instructions clean
+	make ${MAKEFLAGS} -C tests clean
 	rm -Rf ${OBJ_DIR} ${LIB_DIR} avr-emu
