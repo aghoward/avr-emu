@@ -35,6 +35,7 @@ namespace avr {
         CALL  = 0x940E,
         ICALL = 0x9509,
         CPSE  = 0x1000,
+        IJMP  = 0x9409,
         JMP   = 0x940C,
 
         // Read / Write
@@ -75,6 +76,7 @@ namespace avr {
         CALL  = 0xFE0E,
         ICALL = 0xFFFF,
         CPSE  = 0xFC00,
+        IJMP  = 0xFFFF,
         JMP   = 0xFE0E,
 
         // Read / Write
