@@ -22,6 +22,7 @@
 #include "instructions/icall.h"
 #include "instructions/ijmp.h"
 #include "instructions/in.h"
+#include "instructions/inc.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
 #include "instructions/notimplemented.h"
@@ -117,6 +118,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("IN")
             .build();
+        ctx.bind<INCInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("INC")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -145,6 +150,7 @@ namespace avr {
                 std::unique_ptr<ICALLInstruction>,
                 std::unique_ptr<IJMPInstruction>,
                 std::unique_ptr<INInstruction>,
+                std::unique_ptr<INCInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }
