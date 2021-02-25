@@ -3,13 +3,16 @@
 namespace avr {
     enum class OpCode : uint16_t {
         // Arithmetic 
-        ADC  = 0x1c00,
-        ADD  = 0x0c00,
-        ADIW = 0x9600,
-        ASR  = 0x9C05,
-        COM  = 0x9400,
-        DEC  = 0x940A,
-        EOR  = 0x2400,
+        ADC    = 0x1c00,
+        ADD    = 0x0c00,
+        ADIW   = 0x9600,
+        ASR    = 0x9C05,
+        COM    = 0x9400,
+        DEC    = 0x940A,
+        EOR    = 0x2400,
+        FMUL   = 0x0308,
+        FMULS  = 0x0380,
+        FMULSU = 0x0388,
 
         // Logic
         AND  = 0x2000,
@@ -39,13 +42,16 @@ namespace avr {
 
     enum class OpCodeMask : uint16_t {
         // Arithmetic 
-        ADC  = 0xFC00,
-        ADD  = 0xFC00,
-        ADIW = 0xFF00,
-        ASR  = 0xFE0F,
-        COM  = 0xFE00,
-        DEC  = 0xFE0F,
-        EOR  = 0xFC00,
+        ADC    = 0xFC00,
+        ADD    = 0xFC00,
+        ADIW   = 0xFF00,
+        ASR    = 0xFE0F,
+        COM    = 0xFE00,
+        DEC    = 0xFE0F,
+        EOR    = 0xFC00,
+        FMUL   = 0xFF88,
+        FMULS  = 0xFF88,
+        FMULSU = 0xFF88,
 
         // Logic
         AND  = 0xFC00,
