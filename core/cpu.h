@@ -6,6 +6,31 @@
 #include <memory>
 
 namespace avr {
+    struct IndirectRegister {
+    private:
+        uint8_t* const _base;
+
+    public:
+        IndirectRegister(uint8_t* base)
+            : _base(base)
+        {}
+
+        uint16_t operator*() const
+        {
+            uint16_t out = 0u;
+            for (auto i = 0u; i < sizeof(out); i++)
+                out |= static_cast<uint16_t>(_base[i] << (i * 8u));
+            return out;
+        }
+
+        uint16_t operator=(uint16_t value)
+        {
+            for (auto i = 0u; i < sizeof(value); i++)
+                _base[i] = (value >> (i * 8u)) & 0xFFu;
+            return value;
+        }
+    };
+
     struct CPU {
         constexpr static uint16_t R_END = 0x1Fu;
         constexpr static uint16_t GPIO_END = 0x5Fu;
@@ -29,6 +54,9 @@ namespace avr {
                     I : 1;
         } SREG;
 
+        IndirectRegister X;
+        IndirectRegister Y;
+        IndirectRegister Z;
         uint8_t RAMPX;
         uint8_t RAMPY;
         uint8_t RAMPZ;
@@ -40,6 +68,9 @@ namespace avr {
             GPIO(std::addressof(mem[R_END + 1u])),
             PC(0x0u),
             SP(0x0u),
+            X(std::addressof(R[26])),
+            Y(std::addressof(R[28])),
+            Z(std::addressof(R[30])),
             RAMPX(0x0u),
             RAMPY(0x0u),
             RAMPD(0x0u),

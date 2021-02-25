@@ -30,11 +30,12 @@ namespace avr {
         CPI   = 0x3000,
 
         // Branching
-        BRBC = 0xF400,
-        BRBS = 0xF000,
-        CALL = 0x940E,
-        CPSE = 0x1000,
-        JMP  = 0x940C,
+        BRBC  = 0xF400,
+        BRBS  = 0xF000,
+        CALL  = 0x940E,
+        ICALL = 0x9509,
+        CPSE  = 0x1000,
+        JMP   = 0x940C,
 
         // Read / Write
         LDS  = 0x9000,
@@ -69,11 +70,12 @@ namespace avr {
         CPI   = 0xF000,
 
         // Branching
-        BRBC = 0xFC00,
-        BRBS = 0xFC00,
-        CALL = 0xFE0E,
-        CPSE = 0xFC00,
-        JMP  = 0xFE0E,
+        BRBC  = 0xFC00,
+        BRBS  = 0xFC00,
+        CALL  = 0xFE0E,
+        ICALL = 0xFFFF,
+        CPSE  = 0xFC00,
+        JMP   = 0xFE0E,
 
         // Read / Write
         LDS  = 0xFE0F,

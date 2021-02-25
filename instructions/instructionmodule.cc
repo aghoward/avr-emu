@@ -19,6 +19,7 @@
 #include "instructions/dec.h"
 #include "instructions/eor.h"
 #include "instructions/fmul.h"
+#include "instructions/icall.h"
 #include "instructions/instructionexecutor.h"
 #include "instructions/instructionmodule.h"
 #include "instructions/notimplemented.h"
@@ -102,6 +103,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("FMUL")
             .build();
+        ctx.bind<ICALLInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("ICALL")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -127,6 +132,7 @@ namespace avr {
                 std::unique_ptr<DECInstruction>,
                 std::unique_ptr<EORInstruction>,
                 std::unique_ptr<FMULInstruction>,
+                std::unique_ptr<ICALLInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }
