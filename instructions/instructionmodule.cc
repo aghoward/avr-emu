@@ -31,6 +31,7 @@
 #include "instructions/lat.h"
 #include "instructions/ld.h"
 #include "instructions/ldd.h"
+#include "instructions/lddz.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -152,6 +153,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("LDD")
             .build();
+        ctx.bind<LDDZInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("LDDZ")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -187,6 +192,7 @@ namespace avr {
                 std::unique_ptr<LATInstruction>,
                 std::unique_ptr<LDInstruction>,
                 std::unique_ptr<LDDInstruction>,
+                std::unique_ptr<LDDZInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }
