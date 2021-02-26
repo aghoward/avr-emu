@@ -31,16 +31,16 @@ namespace avr {
             (!(result & 0x80) && ((rd & 0x80) || (rr & 0x80)));
     }
 
-    uint32_t ADDInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t ADDInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rr = GetSourceRegister(cpu, opcode);
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rr = GetSourceRegister(ctx.cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
         auto value = static_cast<uint8_t>(rr + rd);
         if (IsADC(opcode))
-            value += cpu.SREG.C;
+            value += ctx.cpu.SREG.C;
 
-        SetRegisterFlags(cpu, rr, rd, value);
+        SetRegisterFlags(ctx.cpu, rr, rd, value);
         rd = value;
         _clock.ConsumeCycle();
 

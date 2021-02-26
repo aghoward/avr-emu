@@ -34,16 +34,16 @@ namespace avr {
             || ((result & 0x08) && !(rd & 0x08u));
     }
 
-    uint32_t CPInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t CPInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rd = GetDestinationRegister(cpu, opcode);
-        auto& rr = GetSourceRegister(cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
+        auto& rr = GetSourceRegister(ctx.cpu, opcode);
 
         int8_t value = static_cast<int8_t>(rd) - static_cast<int8_t>(rr);
         if (Matches(opcode, OpCode::CPC, OpCodeMask::CPC))
-            value -= cpu.SREG.C;
+            value -= ctx.cpu.SREG.C;
 
-        SetStatusRegisters(cpu, rr, rd, value);
+        SetStatusRegisters(ctx.cpu, rr, rd, value);
         _clock.ConsumeCycle();
         return _cyclesConsumed;
     }

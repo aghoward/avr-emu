@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/lac.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class LACInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         LACInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t dst) const
         {
@@ -28,20 +26,21 @@ class LACInstructionTests : public ::testing::Test
 
         std::tuple<uint16_t, uint8_t> GetRegisters()
         {
-            auto dst = static_cast<uint8_t>(static_cast<uint8_t>(rand()) % 32u);
+            auto dst = static_cast<uint8_t>(static_cast<uint8_t>(rand()) % 30u);
             auto compiledOpcode = GetOpCode(dst);
             return std::make_tuple(std::move(compiledOpcode), dst);
         }
 
         void InitializeZRegister()
         {
-            cpu.Z = static_cast<uint16_t>(rand()) % AVR_EMU_RAM_SIZE;
-            memory[*cpu.Z] = 0x0u;
+            ctx.cpu.Z = (static_cast<uint16_t>(rand()) % (AVR_EMU_RAM_SIZE - ctx.cpu.SRAM_BEG))
+                + ctx.cpu.SRAM_BEG;
+            ctx.ram[*ctx.cpu.Z] = 0x0u;
         }
 
     public:
         LACInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -62,27 +61,27 @@ TEST_F(LACInstructionTests, Matches_GivenLACOpCode_ReturnsTrue)
 TEST_F(LACInstructionTests, Execute_ClearsBitsFromDestinationInMemoryStore)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = 0xFFu;
+    ctx.cpu.R[dst] = 0xFFu;
     InitializeZRegister();
-    memory[*cpu.Z] = 0xFFu;
+    ctx.ram[*ctx.cpu.Z] = 0xFFu;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.R[dst], 0xFFu);
-    ASSERT_EQ(memory[*cpu.Z], 0x0u);
+    ASSERT_EQ(ctx.cpu.R[dst], 0xFFu);
+    ASSERT_EQ(ctx.ram[*ctx.cpu.Z], 0x0u);
 }
 
 TEST_F(LACInstructionTests, Execute_StoresContentsOfMemoryIntoRegister)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(rand());
+    ctx.cpu.R[dst] = static_cast<uint8_t>(rand());
     InitializeZRegister();
     auto expectedRegister = static_cast<uint8_t>(rand());
-    memory[*cpu.Z] = expectedRegister;
-    auto expectedMemory = static_cast<uint8_t>(expectedRegister & ~cpu.R[dst]);
+    ctx.ram[*ctx.cpu.Z] = expectedRegister;
+    auto expectedMemory = static_cast<uint8_t>(expectedRegister & ~ctx.cpu.R[dst]);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.R[dst], expectedRegister);
-    ASSERT_EQ(memory[*cpu.Z], expectedMemory);
+    ASSERT_EQ(ctx.cpu.R[dst], expectedRegister);
+    ASSERT_EQ(ctx.ram[*ctx.cpu.Z], expectedMemory);
 }

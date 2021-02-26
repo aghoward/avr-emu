@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/dec.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class DECInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         DECInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t dst) const
         {
@@ -35,7 +33,7 @@ class DECInstructionTests : public ::testing::Test
 
     public:
         DECInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -56,63 +54,63 @@ TEST_F(DECInstructionTests, Matches_GivenDECOpCode_ReturnsTrue)
 TEST_F(DECInstructionTests, Execute_GivenValue_DecrementsValue)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(rand());
-    auto expected = cpu.R[dst] - 1u;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(rand());
+    auto expected = ctx.cpu.R[dst] - 1u;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.R[dst], expected);
+    ASSERT_EQ(ctx.cpu.R[dst], expected);
 }
 
 TEST_F(DECInstructionTests, Execute_GivenOne_SetsZeroFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(1u);
+    ctx.cpu.R[dst] = static_cast<uint8_t>(1u);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
 }
 
 TEST_F(DECInstructionTests, Execute_GivenNotOne_ClearsZeroFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = (static_cast<uint8_t>(rand()) % 0xFE) + 1u;
+    ctx.cpu.R[dst] = (static_cast<uint8_t>(rand()) % 0xFE) + 1u;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
 }
 
 TEST_F(DECInstructionTests, Execute_GivenSmallestNegative_SetsOverflowFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(0x80u);
+    ctx.cpu.R[dst] = static_cast<uint8_t>(0x80u);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
 }
 
 TEST_F(DECInstructionTests, Execute_GivenResultIsNegative_SetsNegativeFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(0x00u);
+    ctx.cpu.R[dst] = static_cast<uint8_t>(0x00u);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
 }
 
 TEST_F(DECInstructionTests, Execute_GivenResultIsPositive_ClearsNegativeFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = (static_cast<uint8_t>(rand()) % 0x7E) + 0x01u;
+    ctx.cpu.R[dst] = (static_cast<uint8_t>(rand()) % 0x7E) + 0x01u;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
 }

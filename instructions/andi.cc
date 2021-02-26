@@ -26,13 +26,13 @@ namespace avr {
         cpu.SREG.Z = result == 0;
     }
 
-    uint32_t ANDIInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t ANDIInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
         auto src = GetSourceValue(opcode);
-        auto& dst = GetDestinationRegister(cpu, opcode);
+        auto& dst = GetDestinationRegister(ctx.cpu, opcode);
         
         dst = static_cast<uint16_t>(dst & src);
-        SetRegisterFlags(cpu, dst);
+        SetRegisterFlags(ctx.cpu, dst);
         _clock.ConsumeCycle();
 
         return _cyclesConsumed;

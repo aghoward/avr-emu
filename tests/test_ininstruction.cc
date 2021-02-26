@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/in.h"
 #include "instructions/opcodes.h"
@@ -18,8 +17,7 @@ class INInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         INInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -38,7 +36,7 @@ class INInstructionTests : public ::testing::Test
 
     public:
         INInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -59,10 +57,10 @@ TEST_F(INInstructionTests, Matches_GivenINOpCode_ReturnsTrue)
 TEST_F(INInstructionTests, Execute_CopiesIOValueToRegister)
 {
     auto [opcode, src, dst] = GetRegisters();
-    cpu.GPIO[src] = static_cast<uint8_t>(rand());
-    cpu.R[dst] = 0x0u;
+    ctx.cpu.GPIO[src] = static_cast<uint8_t>(rand());
+    ctx.cpu.R[dst] = 0x0u;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.R[dst], cpu.GPIO[src]);
+    ASSERT_EQ(ctx.cpu.R[dst], ctx.cpu.GPIO[src]);
 }

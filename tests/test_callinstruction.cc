@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/call.h"
 #include "instructions/opcodes.h"
@@ -16,8 +15,7 @@ class CALLInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         CALLInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -31,33 +29,33 @@ class CALLInstructionTests : public ::testing::Test
             auto pc = static_cast<uint16_t>(
                     static_cast<uint16_t>(rand()) %
                     (static_cast<uint16_t>(AVR_EMU_FLASH_SIZE) - 2u));
-            cpu.PC = pc;
+            ctx.cpu.PC = pc;
             auto shiftedAddress = static_cast<uint16_t>(address >> 1u);
             for (auto i = static_cast<uint16_t>(0u); i < sizeof(shiftedAddress); i++)
-                memory[pc++] = static_cast<uint8_t>((shiftedAddress >> (8u * i)) & 0xFFu);
+                ctx.progMem[pc++] = static_cast<uint8_t>((shiftedAddress >> (8u * i)) & 0xFFu);
         }
 
         uint16_t InitializeSP()
         {
-            uint16_t sp = static_cast<uint16_t>(rand()) + 2u + cpu.SRAM_BEG;
-            cpu.SP = sp;
-            for (uint16_t i = 0u; i < sizeof(cpu.PC); i++)
-                memory[i] = 0u;
+            uint16_t sp = static_cast<uint16_t>(rand()) + 2u + ctx.cpu.SRAM_BEG;
+            ctx.cpu.SP = sp;
+            for (uint16_t i = 0u; i < sizeof(ctx.cpu.PC); i++)
+                ctx.ram[i] = 0u;
             return sp;
         }
 
         uint16_t ReadReturnAddress()
         {
             uint16_t address = 0u;
-            uint16_t base_address = cpu.SP + 1u;
-            for (uint16_t i = 0; i < sizeof(cpu.PC); i++)
-                address |= static_cast<uint16_t>(memory[base_address + i] << ((sizeof(cpu.PC) - i - 1u) * 8u));
+            uint16_t base_address = ctx.cpu.SP + 1u;
+            for (uint16_t i = 0; i < sizeof(ctx.cpu.PC); i++)
+                address |= static_cast<uint16_t>(ctx.ram[base_address + i] << ((sizeof(ctx.cpu.PC) - i - 1u) * 8u));
             return address;
         }
 
     public:
         CALLInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -82,13 +80,13 @@ TEST_F(CALLInstructionTests, Execute_LongJumpsToOperand)
             static_cast<uint16_t>(rand()) % static_cast<uint16_t>(AVR_EMU_FLASH_SIZE) & 0xFFFEu);
     SetAddressOperand(address);
     auto originalSP = InitializeSP();
-    auto expectedReturnAddress = cpu.PC + static_cast<uint16_t>(sizeof(cpu.PC));
+    auto expectedReturnAddress = ctx.cpu.PC + static_cast<uint16_t>(sizeof(ctx.cpu.PC));
 
-    auto cycles = subject.Execute(opcode, cpu, memory);
+    auto cycles = subject.Execute(opcode, ctx);
     auto actualReturn = ReadReturnAddress();
 
     ASSERT_EQ(cycles, 4u);
-    ASSERT_EQ(cpu.PC, address);
-    ASSERT_EQ(cpu.SP, originalSP - sizeof(cpu.PC));
+    ASSERT_EQ(ctx.cpu.PC, address);
+    ASSERT_EQ(ctx.cpu.SP, originalSP - sizeof(ctx.cpu.PC));
     ASSERT_EQ(actualReturn, expectedReturnAddress);
 }

@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/bclr.h"
 #include "instructions/opcodes.h"
@@ -14,12 +13,10 @@ using namespace avr;
 
 class BCLRInstructionTests : public ::testing::Test
 {
-
     protected:
         NoopClock clock;
         BCLRInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(OpCode opcode, uint8_t src) const
         {
@@ -29,14 +26,14 @@ class BCLRInstructionTests : public ::testing::Test
 
         void SetAllFlags(bool value)
         {
-            cpu.SREG.C = 
-                cpu.SREG.Z = 
-                cpu.SREG.N = 
-                cpu.SREG.V = 
-                cpu.SREG.S = 
-                cpu.SREG.H = 
-                cpu.SREG.T = 
-                cpu.SREG.I =
+            ctx.cpu.SREG.C =
+                ctx.cpu.SREG.Z =
+                ctx.cpu.SREG.N =
+                ctx.cpu.SREG.V =
+                ctx.cpu.SREG.S =
+                ctx.cpu.SREG.H =
+                ctx.cpu.SREG.T =
+                ctx.cpu.SREG.I =
                 value;
         }
 
@@ -52,7 +49,7 @@ class BCLRInstructionTests : public ::testing::Test
 
     public:
         BCLRInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -81,16 +78,16 @@ TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenZero_ClearsCarryFlag)
     auto opcode = GetOpCode(OpCode::BCLR, 0u);
     SetAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.H);
-    ASSERT_TRUE(cpu.SREG.T);
-    ASSERT_TRUE(cpu.SREG.I);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.H);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenOne_ClearsZeroFlag)
@@ -98,16 +95,16 @@ TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenOne_ClearsZeroFlag)
     auto opcode = GetOpCode(OpCode::BCLR, 1u);
     SetAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.H);
-    ASSERT_TRUE(cpu.SREG.T);
-    ASSERT_TRUE(cpu.SREG.I);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.H);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenTwo_ClearsNegativeFlag)
@@ -115,16 +112,16 @@ TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenTwo_ClearsNegativeFlag)
     auto opcode = GetOpCode(OpCode::BCLR, 2u);
     SetAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.H);
-    ASSERT_TRUE(cpu.SREG.T);
-    ASSERT_TRUE(cpu.SREG.I);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.H);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenThree_ClearsOverflowFlag)
@@ -132,16 +129,16 @@ TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenThree_ClearsOverflowFlag)
     auto opcode = GetOpCode(OpCode::BCLR, 3u);
     SetAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.H);
-    ASSERT_TRUE(cpu.SREG.T);
-    ASSERT_TRUE(cpu.SREG.I);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.H);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenFour_ClearsSignFlag)
@@ -149,16 +146,16 @@ TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenFour_ClearsSignFlag)
     auto opcode = GetOpCode(OpCode::BCLR, 4u);
     SetAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.H);
-    ASSERT_TRUE(cpu.SREG.T);
-    ASSERT_TRUE(cpu.SREG.I);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.H);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenFive_ClearsHalfCarryFlag)
@@ -166,16 +163,16 @@ TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenFive_ClearsHalfCarryFlag)
     auto opcode = GetOpCode(OpCode::BCLR, 5u);
     SetAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.H);
-    ASSERT_TRUE(cpu.SREG.T);
-    ASSERT_TRUE(cpu.SREG.I);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.H);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenSix_ClearsBitCopyFlag)
@@ -183,16 +180,16 @@ TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenSix_ClearsBitCopyFlag)
     auto opcode = GetOpCode(OpCode::BCLR, 6u);
     SetAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.H);
-    ASSERT_FALSE(cpu.SREG.T);
-    ASSERT_TRUE(cpu.SREG.I);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.H);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenSeven_ClearsInterruptFlag)
@@ -200,16 +197,16 @@ TEST_F(BCLRInstructionTests, ExecuteBCLR_GivenSeven_ClearsInterruptFlag)
     auto opcode = GetOpCode(OpCode::BCLR, 7u);
     SetAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.H);
-    ASSERT_TRUE(cpu.SREG.T);
-    ASSERT_FALSE(cpu.SREG.I);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.H);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBSET_GivenZero_SetsCarryFlag)
@@ -217,16 +214,16 @@ TEST_F(BCLRInstructionTests, ExecuteBSET_GivenZero_SetsCarryFlag)
     auto opcode = GetOpCode(OpCode::BSET, 0u);
     ClearAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.H);
-    ASSERT_FALSE(cpu.SREG.T);
-    ASSERT_FALSE(cpu.SREG.I);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.H);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBSET_GivenOne_SetsZeroFlag)
@@ -234,16 +231,16 @@ TEST_F(BCLRInstructionTests, ExecuteBSET_GivenOne_SetsZeroFlag)
     auto opcode = GetOpCode(OpCode::BSET, 1u);
     ClearAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.H);
-    ASSERT_FALSE(cpu.SREG.T);
-    ASSERT_FALSE(cpu.SREG.I);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.H);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBSET_GivenTwo_SetsNegativeFlag)
@@ -251,16 +248,16 @@ TEST_F(BCLRInstructionTests, ExecuteBSET_GivenTwo_SetsNegativeFlag)
     auto opcode = GetOpCode(OpCode::BSET, 2u);
     ClearAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.H);
-    ASSERT_FALSE(cpu.SREG.T);
-    ASSERT_FALSE(cpu.SREG.I);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.H);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBSET_GivenThree_SetsOverflowFlag)
@@ -268,16 +265,16 @@ TEST_F(BCLRInstructionTests, ExecuteBSET_GivenThree_SetsOverflowFlag)
     auto opcode = GetOpCode(OpCode::BSET, 3u);
     ClearAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.H);
-    ASSERT_FALSE(cpu.SREG.T);
-    ASSERT_FALSE(cpu.SREG.I);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.H);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBSET_GivenFour_SetsSignFlag)
@@ -285,16 +282,16 @@ TEST_F(BCLRInstructionTests, ExecuteBSET_GivenFour_SetsSignFlag)
     auto opcode = GetOpCode(OpCode::BSET, 4u);
     ClearAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.H);
-    ASSERT_FALSE(cpu.SREG.T);
-    ASSERT_FALSE(cpu.SREG.I);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.H);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBSET_GivenFive_SetsHalfCarryFlag)
@@ -302,16 +299,16 @@ TEST_F(BCLRInstructionTests, ExecuteBSET_GivenFive_SetsHalfCarryFlag)
     auto opcode = GetOpCode(OpCode::BSET, 5u);
     ClearAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.H);
-    ASSERT_FALSE(cpu.SREG.T);
-    ASSERT_FALSE(cpu.SREG.I);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.H);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBSET_GivenSix_SetsBitCopyFlag)
@@ -319,16 +316,16 @@ TEST_F(BCLRInstructionTests, ExecuteBSET_GivenSix_SetsBitCopyFlag)
     auto opcode = GetOpCode(OpCode::BSET, 6u);
     ClearAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.H);
-    ASSERT_TRUE(cpu.SREG.T);
-    ASSERT_FALSE(cpu.SREG.I);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.H);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.I);
 }
 
 TEST_F(BCLRInstructionTests, ExecuteBSET_GivenSeven_SetsInterruptFlag)
@@ -336,15 +333,15 @@ TEST_F(BCLRInstructionTests, ExecuteBSET_GivenSeven_SetsInterruptFlag)
     auto opcode = GetOpCode(OpCode::BSET, 7u);
     ClearAllFlags();
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.H);
-    ASSERT_FALSE(cpu.SREG.T);
-    ASSERT_TRUE(cpu.SREG.I);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.H);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.I);
 }
 

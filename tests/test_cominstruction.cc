@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/com.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class COMInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         COMInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t dst) const
         {
@@ -35,7 +33,7 @@ class COMInstructionTests : public ::testing::Test
 
     public:
         COMInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -56,53 +54,53 @@ TEST_F(COMInstructionTests, Matches_GivenCOMOpCode_ReturnsTrue)
 TEST_F(COMInstructionTests, Execute_GivenValue_SetsRegisterToComplimentValue)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(rand()) & 0xFFu;
-    uint8_t expectedValue = cpu.R[dst] ^ 0xFFu;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(rand()) & 0xFFu;
+    uint8_t expectedValue = ctx.cpu.R[dst] ^ 0xFFu;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.R[dst], expectedValue);
+    ASSERT_EQ(ctx.cpu.R[dst], expectedValue);
 }
 
 TEST_F(COMInstructionTests, Execute_GivenSignBitNotSet_SetsNegativeFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(rand()) & 0x7Fu;
-    cpu.SREG.N = false;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(rand()) & 0x7Fu;
+    ctx.cpu.SREG.N = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
 }
 
 TEST_F(COMInstructionTests, Execute_GivenSignBitSet_ClearsNegativeFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = (static_cast<uint8_t>(rand()) & 0xFFu) | 0x80u;
-    cpu.SREG.N = true;
+    ctx.cpu.R[dst] = (static_cast<uint8_t>(rand()) & 0xFFu) | 0x80u;
+    ctx.cpu.SREG.N = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
 }
 
 TEST_F(COMInstructionTests, Execute_GivenAllBitsSet_SetsZeroFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = 0xFFu;
-    cpu.SREG.Z = false;
+    ctx.cpu.R[dst] = 0xFFu;
+    ctx.cpu.SREG.Z = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.C);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
 }

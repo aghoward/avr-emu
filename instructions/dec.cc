@@ -19,12 +19,12 @@ namespace avr {
         cpu.SREG.S = cpu.SREG.N ^ cpu.SREG.V;
     }
 
-    uint32_t DECInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t DECInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
         int8_t value = static_cast<int8_t>(rd - 1u);
-        SetStatusRegisters(cpu, rd, value);
+        SetStatusRegisters(ctx.cpu, rd, value);
         rd = static_cast<uint8_t>(value);
 
         _clock.ConsumeCycle();

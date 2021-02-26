@@ -4,7 +4,7 @@
 #include <cstdint>
 
 namespace avr {
-    uint32_t BREAKInstruction::Execute(uint16_t, CPU&, SRAM&) const
+    uint32_t BREAKInstruction::Execute(uint16_t, ExecutionContext&) const
     {
         _clock.ConsumeCycle();
         return _cyclesConsumed;

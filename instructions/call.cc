@@ -14,7 +14,7 @@ namespace avr {
         }
     }
 
-    uint16_t CALLInstruction::GetDestinationAddress(CPU& cpu, SRAM& mem) const
+    uint16_t CALLInstruction::GetDestinationAddress(CPU& cpu, ProgramMemory& mem) const
     {
         auto address = static_cast<uint16_t>(0u);
         for (auto i = 0u; i < sizeof(address); i++)
@@ -24,10 +24,10 @@ namespace avr {
         return (address << 1u);
     }
 
-    uint32_t CALLInstruction::Execute(uint16_t, CPU& cpu, SRAM& mem) const
+    uint32_t CALLInstruction::Execute(uint16_t, ExecutionContext& ctx) const
     {
-        PushReturnAddress(cpu, mem);
-        cpu.PC = GetDestinationAddress(cpu, mem);
+        PushReturnAddress(ctx.cpu, ctx.ram);
+        ctx.cpu.PC = GetDestinationAddress(ctx.cpu, ctx.progMem);
         _clock.ConsumeCycle();
         return _cyclesConsumed;
     }

@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/adiw.h"
 #include "instructions/opcodes.h"
@@ -18,8 +17,7 @@ class ADIWInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         ADIWInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dstIndex) const
         {
@@ -39,7 +37,7 @@ class ADIWInstructionTests : public ::testing::Test
 
     public:
         ADIWInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -60,71 +58,71 @@ TEST_F(ADIWInstructionTests, Matches_GivenADIWOpCode_ReturnsTrue)
 TEST_F(ADIWInstructionTests, Execute_GivenNoOverflow_CanAddTwoRegisters)
 {
     auto [opcode, addend, dstIndex] = GetRegisters();
-    cpu.R[dstIndex] = 0x42u;
-    cpu.R[dstIndex+1] = 0x0u;
-    cpu.SREG.C = 0;
+    ctx.cpu.R[dstIndex] = 0x42u;
+    ctx.cpu.R[dstIndex+1] = 0x0u;
+    ctx.cpu.SREG.C = 0;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    auto result = static_cast<uint16_t>((cpu.R[dstIndex]) | (cpu.R[dstIndex+1] << 8));
+    auto result = static_cast<uint16_t>((ctx.cpu.R[dstIndex]) | (ctx.cpu.R[dstIndex+1] << 8));
     ASSERT_EQ(result, addend + 0x42u);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
 }
 
 TEST_F(ADIWInstructionTests, Execute_GivenLowByteOverflow_CanAddTwoRegisters)
 {
     auto [opcode, addend, dstIndex] = GetRegisters();
-    cpu.R[dstIndex] = 0xFFu;
-    cpu.R[dstIndex+1] = 0x0u;
-    cpu.SREG.C = 0;
+    ctx.cpu.R[dstIndex] = 0xFFu;
+    ctx.cpu.R[dstIndex+1] = 0x0u;
+    ctx.cpu.SREG.C = 0;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    auto result = static_cast<uint16_t>((cpu.R[dstIndex]) | (cpu.R[dstIndex+1] << 8));
+    auto result = static_cast<uint16_t>((ctx.cpu.R[dstIndex]) | (ctx.cpu.R[dstIndex+1] << 8));
     ASSERT_EQ(result, addend + 0xFFu);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
 }
 
 TEST_F(ADIWInstructionTests, Execute_GivenHighByteOverflow_SetsStatusRegister)
 {
     auto [opcode, addend, dstIndex] = GetRegisters();
-    cpu.R[dstIndex] = 0xffu;
-    cpu.R[dstIndex+1] = 0x7fu;
-    cpu.SREG.C = 0;
+    ctx.cpu.R[dstIndex] = 0xffu;
+    ctx.cpu.R[dstIndex+1] = 0x7fu;
+    ctx.cpu.SREG.C = 0;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    auto result = static_cast<uint16_t>((cpu.R[dstIndex]) | (cpu.R[dstIndex+1] << 8));
+    auto result = static_cast<uint16_t>((ctx.cpu.R[dstIndex]) | (ctx.cpu.R[dstIndex+1] << 8));
     ASSERT_EQ(result, addend + 0x7FFFu);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.Z);
-    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
 }
 
 TEST_F(ADIWInstructionTests, Execute_GivenCarry_SetsStatusRegister)
 {
     auto [opcode, addend, dstIndex] = GetRegisters();
-    cpu.R[dstIndex] = 0xffu;
-    cpu.R[dstIndex+1] = 0xffu;
-    cpu.SREG.C = 0;
+    ctx.cpu.R[dstIndex] = 0xffu;
+    ctx.cpu.R[dstIndex+1] = 0xffu;
+    ctx.cpu.SREG.C = 0;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    auto result = static_cast<uint16_t>((cpu.R[dstIndex]) | (cpu.R[dstIndex+1] << 8));
+    auto result = static_cast<uint16_t>((ctx.cpu.R[dstIndex]) | (ctx.cpu.R[dstIndex+1] << 8));
     ASSERT_EQ(result, (addend + 0xFFFFu) & 0xFFFFu);
-    ASSERT_FALSE(cpu.SREG.S);
-    ASSERT_FALSE(cpu.SREG.V);
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_EQ(cpu.SREG.Z, result == 0u);
-    ASSERT_TRUE(cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.V);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_EQ(ctx.cpu.SREG.Z, result == 0u);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
 }

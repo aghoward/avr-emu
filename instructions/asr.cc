@@ -20,13 +20,13 @@ namespace avr {
         cpu.SREG.S = cpu.SREG.V ^ cpu.SREG.N;
     }
 
-    uint32_t ASRInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t ASRInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
         bool signBit = (rd & 0x80) != 0u;
         auto value = static_cast<uint8_t>((rd >> 1) | (signBit << 7));
 
-        SetRegisterFlags(cpu, rd, value);
+        SetRegisterFlags(ctx.cpu, rd, value);
         rd = value;
         _clock.ConsumeCycle();
 

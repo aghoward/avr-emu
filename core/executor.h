@@ -26,6 +26,6 @@ namespace avr {
                   _executors(std::move(executors))
             {}
 
-            void Execute(CPU& cpu, ProgramMemory& progMem, SRAM& sram, uint32_t cyclesRequested) const;
+            void Execute(ExecutionContext& ctx, uint32_t cyclesRequested) const;
     };
 }

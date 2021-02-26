@@ -17,13 +17,13 @@ namespace avr {
         return cpu.R[value];
     }
 
-    uint32_t BLDInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t BLDInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
         auto bitShift = GetSourceValue(opcode);
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
-        if (cpu.SREG.T)
-            rd |= static_cast<uint8_t>(cpu.SREG.T << bitShift);
+        if (ctx.cpu.SREG.T)
+            rd |= static_cast<uint8_t>(ctx.cpu.SREG.T << bitShift);
         else
             rd &= 0xFFu ^ static_cast<uint8_t>(0x1u << bitShift);
 

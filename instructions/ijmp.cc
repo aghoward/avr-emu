@@ -4,9 +4,9 @@
 #include <cstdint>
 
 namespace avr {
-    uint32_t IJMPInstruction::Execute(uint16_t, CPU& cpu, SRAM&) const
+    uint32_t IJMPInstruction::Execute(uint16_t, ExecutionContext& ctx) const
     {
-        cpu.PC = *cpu.Z;
+        ctx.cpu.PC = *ctx.cpu.Z;
         _clock.ConsumeCycle();
         _clock.ConsumeCycle();
         return _cyclesConsumed;

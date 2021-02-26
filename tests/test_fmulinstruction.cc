@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/fmul.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class FMULInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         FMULInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(OpCode opcode, uint8_t src, uint8_t dst) const
         {
@@ -39,13 +37,13 @@ class FMULInstructionTests : public ::testing::Test
         {
             uint16_t result = 0x0u;
             for (auto i = 0u; i < sizeof(result); i++)
-                result |= static_cast<uint16_t>(cpu.R[i] << (8u * i));
+                result |= static_cast<uint16_t>(ctx.cpu.R[i] << (8u * i));
             return result;
         }
 
     public:
         FMULInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -66,60 +64,60 @@ TEST_F(FMULInstructionTests, Matches_GivenFMULOpCode_ReturnsTrue)
 TEST_F(FMULInstructionTests, ExecuteFMUL_GivenResultIsZero_SetsZeroFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMUL);
-    cpu.R[src] = static_cast<uint8_t>(rand());
-    cpu.R[dst] = 0x0u;
-    cpu.SREG.Z = false;
+    ctx.cpu.R[src] = static_cast<uint8_t>(rand());
+    ctx.cpu.R[dst] = 0x0u;
+    ctx.cpu.SREG.Z = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
     ASSERT_EQ(GetResult(), 0x0u);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMUL_GivenResultIsNotZero_ClearsZeroFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMUL);
-    cpu.R[src] = static_cast<uint8_t>(rand() % 5 + 1);
-    cpu.R[dst] = 0x1u;
-    cpu.SREG.Z = true;
+    ctx.cpu.R[src] = static_cast<uint8_t>(rand() % 5 + 1);
+    ctx.cpu.R[dst] = 0x1u;
+    ctx.cpu.SREG.Z = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMUL_GivenResultCausesOverflow_SetsCarryFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMUL);
-    cpu.R[src] = 0x81u;
-    cpu.R[dst] = 0xFFu;
-    cpu.SREG.C = false;
+    ctx.cpu.R[src] = 0x81u;
+    ctx.cpu.R[dst] = 0xFFu;
+    ctx.cpu.SREG.C = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMUL_GivenResultDoesNotCauseOverflow_ClearsCarryFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMUL);
-    cpu.R[src] = 0x20u;
-    cpu.R[dst] = 0x02u;
-    cpu.SREG.C = true;
+    ctx.cpu.R[src] = 0x20u;
+    ctx.cpu.R[dst] = 0x02u;
+    ctx.cpu.SREG.C = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMUL_DoesAFractionalMultiply)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMUL);
-    cpu.R[src] = 0x20u;
-    cpu.R[dst] = 0x02u;
-    auto expectedResult = static_cast<uint16_t>((cpu.R[src] * cpu.R[dst]) << 1);
+    ctx.cpu.R[src] = 0x20u;
+    ctx.cpu.R[dst] = 0x02u;
+    auto expectedResult = static_cast<uint16_t>((ctx.cpu.R[src] * ctx.cpu.R[dst]) << 1);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
     ASSERT_EQ(GetResult(), expectedResult);
 }
@@ -133,60 +131,60 @@ TEST_F(FMULInstructionTests, Matches_GivenFMULSOpCode_ReturnsTrue)
 TEST_F(FMULInstructionTests, ExecuteFMULS_GivenResultIsZero_SetsZeroFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULS);
-    cpu.R[src] = static_cast<uint8_t>(rand());
-    cpu.R[dst] = 0x0u;
-    cpu.SREG.Z = false;
+    ctx.cpu.R[src] = static_cast<uint8_t>(rand());
+    ctx.cpu.R[dst] = 0x0u;
+    ctx.cpu.SREG.Z = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
     ASSERT_EQ(GetResult(), 0x0u);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMULS_GivenResultIsNotZero_ClearsZeroFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULS);
-    cpu.R[src] = static_cast<uint8_t>(rand() % 5 + 1);
-    cpu.R[dst] = 0x1u;
-    cpu.SREG.Z = true;
+    ctx.cpu.R[src] = static_cast<uint8_t>(rand() % 5 + 1);
+    ctx.cpu.R[dst] = 0x1u;
+    ctx.cpu.SREG.Z = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMULS_GivenResultCausesOverflow_SetsCarryFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULS);
-    cpu.R[src] = 0x81u;
-    cpu.R[dst] = 0xFFu;
-    cpu.SREG.C = false;
+    ctx.cpu.R[src] = 0x81u;
+    ctx.cpu.R[dst] = 0xFFu;
+    ctx.cpu.SREG.C = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMULS_GivenResultDoesNotCauseOverflow_ClearsCarryFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULS);
-    cpu.R[src] = 0x20u;
-    cpu.R[dst] = 0x02u;
-    cpu.SREG.C = true;
+    ctx.cpu.R[src] = 0x20u;
+    ctx.cpu.R[dst] = 0x02u;
+    ctx.cpu.SREG.C = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMULS_DoesAFractionalMultiply)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULS);
-    cpu.R[src] = 0x20u;
-    cpu.R[dst] = 0x02u;
-    auto expectedResult = static_cast<uint16_t>((cpu.R[src] * cpu.R[dst]) << 1);
+    ctx.cpu.R[src] = 0x20u;
+    ctx.cpu.R[dst] = 0x02u;
+    auto expectedResult = static_cast<uint16_t>((ctx.cpu.R[src] * ctx.cpu.R[dst]) << 1);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
     ASSERT_EQ(GetResult(), expectedResult);
 }
@@ -200,60 +198,60 @@ TEST_F(FMULInstructionTests, Matches_GivenFMULSUOpCode_ReturnsTrue)
 TEST_F(FMULInstructionTests, ExecuteFMULSU_GivenResultIsZero_SetsZeroFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULSU);
-    cpu.R[src] = static_cast<uint8_t>(rand());
-    cpu.R[dst] = 0x0u;
-    cpu.SREG.Z = false;
+    ctx.cpu.R[src] = static_cast<uint8_t>(rand());
+    ctx.cpu.R[dst] = 0x0u;
+    ctx.cpu.SREG.Z = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
     ASSERT_EQ(GetResult(), 0x0u);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMULSU_GivenResultIsNotZero_ClearsZeroFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULSU);
-    cpu.R[src] = static_cast<uint8_t>(rand() % 5 + 1);
-    cpu.R[dst] = 0x1u;
-    cpu.SREG.Z = true;
+    ctx.cpu.R[src] = static_cast<uint8_t>(rand() % 5 + 1);
+    ctx.cpu.R[dst] = 0x1u;
+    ctx.cpu.SREG.Z = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMULSU_GivenResultCausesOverflow_SetsCarryFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULSU);
-    cpu.R[src] = 0x81u;
-    cpu.R[dst] = 0xFFu;
-    cpu.SREG.C = false;
+    ctx.cpu.R[src] = 0x81u;
+    ctx.cpu.R[dst] = 0xFFu;
+    ctx.cpu.SREG.C = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.C);
+    ASSERT_TRUE(ctx.cpu.SREG.C);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMULSU_GivenResultDoesNotCauseOverflow_ClearsCarryFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULSU);
-    cpu.R[src] = 0x20u;
-    cpu.R[dst] = 0x02u;
-    cpu.SREG.C = true;
+    ctx.cpu.R[src] = 0x20u;
+    ctx.cpu.R[dst] = 0x02u;
+    ctx.cpu.SREG.C = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.C);
+    ASSERT_FALSE(ctx.cpu.SREG.C);
 }
 
 TEST_F(FMULInstructionTests, ExecuteFMULSU_DoesAFractionalMultiply)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::FMULSU);
-    cpu.R[src] = 0x20u;
-    cpu.R[dst] = 0x02u;
-    auto expectedResult = static_cast<uint16_t>((cpu.R[src] * cpu.R[dst]) << 1);
+    ctx.cpu.R[src] = 0x20u;
+    ctx.cpu.R[dst] = 0x02u;
+    auto expectedResult = static_cast<uint16_t>((ctx.cpu.R[src] * ctx.cpu.R[dst]) << 1);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
     ASSERT_EQ(GetResult(), expectedResult);
 }

@@ -13,10 +13,10 @@ namespace avr {
         }
     }
 
-    uint32_t ICALLInstruction::Execute(uint16_t, CPU& cpu, SRAM& mem) const
+    uint32_t ICALLInstruction::Execute(uint16_t, ExecutionContext& ctx) const
     {
-        PushReturnAddress(cpu, mem);
-        cpu.PC = *cpu.Z;
+        PushReturnAddress(ctx.cpu, ctx.ram);
+        ctx.cpu.PC = *ctx.cpu.Z;
         _clock.ConsumeCycle();
         return _cyclesConsumed;
     }

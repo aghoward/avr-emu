@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/inc.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class INCInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         INCInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t dst) const
         {
@@ -35,7 +33,7 @@ class INCInstructionTests : public ::testing::Test
 
     public:
         INCInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -56,71 +54,71 @@ TEST_F(INCInstructionTests, Matches_GivenINCOpCode_ReturnsTrue)
 TEST_F(INCInstructionTests, Execute_GivenValue_IncrementsValue)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(rand());
-    auto expected = cpu.R[dst] + 1u;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(rand());
+    auto expected = ctx.cpu.R[dst] + 1u;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.R[dst], expected);
+    ASSERT_EQ(ctx.cpu.R[dst], expected);
 }
 
 TEST_F(INCInstructionTests, Execute_Given255_SetsZeroFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(255u);
-    cpu.SREG.Z = false;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(255u);
+    ctx.cpu.SREG.Z = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.Z);
+    ASSERT_TRUE(ctx.cpu.SREG.Z);
 }
 
 TEST_F(INCInstructionTests, Execute_GivenNot255_ClearsZeroFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(rand() % 0xFF);
-    cpu.SREG.Z = true;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(rand() % 0xFF);
+    ctx.cpu.SREG.Z = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.Z);
+    ASSERT_FALSE(ctx.cpu.SREG.Z);
 }
 
 TEST_F(INCInstructionTests, Execute_GivenLargestPositive_SetsOverflowFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(0x7fu);
-    cpu.SREG.V = false;
-    cpu.SREG.S = false;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(0x7fu);
+    ctx.cpu.SREG.V = false;
+    ctx.cpu.SREG.S = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.V);
-    ASSERT_TRUE(cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.V);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
 }
 
 TEST_F(INCInstructionTests, Execute_GivenResultIsNegative_SetsNegativeFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(0x82u);
-    cpu.SREG.N = false;
-    cpu.SREG.S = false;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(0x82u);
+    ctx.cpu.SREG.N = false;
+    ctx.cpu.SREG.S = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.N);
-    ASSERT_TRUE(cpu.SREG.S);
+    ASSERT_TRUE(ctx.cpu.SREG.N);
+    ASSERT_TRUE(ctx.cpu.SREG.S);
 }
 
 TEST_F(INCInstructionTests, Execute_GivenResultIsPositive_ClearsNegativeFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(rand() % 0x7E);
-    cpu.SREG.N = true;
-    cpu.SREG.S = true;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(rand() % 0x7E);
+    ctx.cpu.SREG.N = true;
+    ctx.cpu.SREG.S = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.N);
-    ASSERT_FALSE(cpu.SREG.S);
+    ASSERT_FALSE(ctx.cpu.SREG.N);
+    ASSERT_FALSE(ctx.cpu.SREG.S);
 }

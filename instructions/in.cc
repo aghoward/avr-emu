@@ -18,10 +18,10 @@ namespace avr {
         return cpu.R[value];
     }
 
-    uint32_t INInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t INInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rr = GetSourceRegister(cpu, opcode);
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rr = GetSourceRegister(ctx.cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
         rd = rr;
 

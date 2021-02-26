@@ -11,19 +11,19 @@ namespace avr {
         return cpu.R[index];
     }
 
-    uint32_t LDInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM& mem) const
+    uint32_t LDInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
         if (IsPreDecrement(opcode))
-            --cpu.X;
+            --ctx.cpu.X;
 
         _clock.ConsumeCycle();
-        rd = mem[*cpu.X];
+        rd = ctx.ram[*ctx.cpu.X];
         _clock.ConsumeCycle();
 
         if (IsPostIncrement(opcode))
-            cpu.X++;
+            ctx.cpu.X++;
 
         return _cyclesConsumed;
     }

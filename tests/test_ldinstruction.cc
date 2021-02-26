@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/ld.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class LDInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         LDInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t dst) const
         {
@@ -28,20 +26,21 @@ class LDInstructionTests : public ::testing::Test
 
         std::tuple<uint16_t, uint8_t> GetRegisters()
         {
-            auto dst = static_cast<uint8_t>(static_cast<uint8_t>(rand()) % 32u);
+            auto dst = static_cast<uint8_t>(static_cast<uint8_t>(rand()) % 26u);
             auto compiledOpcode = GetOpCode(dst);
             return std::make_tuple(std::move(compiledOpcode), dst);
         }
 
         void InitializeXRegister()
         {
-            cpu.X = static_cast<uint16_t>(rand()) % AVR_EMU_RAM_SIZE;
-            memory[*cpu.X] = 0x0u;
+            ctx.cpu.X = (static_cast<uint16_t>(rand()) % (AVR_EMU_RAM_SIZE - ctx.cpu.SRAM_BEG))
+                + ctx.cpu.SRAM_BEG;
+            ctx.ram[*ctx.cpu.X] = 0x0u;
         }
 
     public:
         LDInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -62,44 +61,44 @@ TEST_F(LDInstructionTests, Matches_GivenLDOpCode_ReturnsTrue)
 TEST_F(LDInstructionTests, Execute_GivenNoIncrementOrDecrement_LoadsMemoryAddressToRegister)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = 0x00u;
+    ctx.cpu.R[dst] = 0x00u;
     InitializeXRegister();
-    memory[*cpu.X] = static_cast<uint8_t>(rand());
-    auto expectedValue = memory[*cpu.X];
-    auto expectedX = *cpu.X;
+    ctx.ram[*ctx.cpu.X] = static_cast<uint8_t>(rand());
+    auto expectedValue = ctx.ram[*ctx.cpu.X];
+    auto expectedX = *ctx.cpu.X;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.R[dst], expectedValue);
-    ASSERT_EQ(*cpu.X, expectedX);
+    ASSERT_EQ(ctx.cpu.R[dst], expectedValue);
+    ASSERT_EQ(*ctx.cpu.X, expectedX);
 }
 
 TEST_F(LDInstructionTests, Execute_GivenPostIncrement_LoadsMemoryAddressToRegisterAndIncrementsX)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = 0x00u;
+    ctx.cpu.R[dst] = 0x00u;
     InitializeXRegister();
-    memory[*cpu.X] = static_cast<uint8_t>(rand());
-    auto expectedValue = memory[*cpu.X];
-    auto expectedX = *cpu.X + 1u;
+    ctx.ram[*ctx.cpu.X] = static_cast<uint8_t>(rand());
+    auto expectedValue = ctx.ram[*ctx.cpu.X];
+    auto expectedX = *ctx.cpu.X + 1u;
 
-    subject.Execute(static_cast<uint16_t>(opcode | 0x1), cpu, memory);
+    subject.Execute(static_cast<uint16_t>(opcode | 0x1), ctx);
 
-    ASSERT_EQ(cpu.R[dst], expectedValue);
-    ASSERT_EQ(*cpu.X, expectedX);
+    ASSERT_EQ(ctx.cpu.R[dst], expectedValue);
+    ASSERT_EQ(*ctx.cpu.X, expectedX);
 }
 
 TEST_F(LDInstructionTests, Execute_GivenPreDecrement_LoadsPreviousMemoryAddressToRegisterAndDecrementsX)
 {
     auto [opcode, dst] = GetRegisters();
-    cpu.R[dst] = 0x00u;
+    ctx.cpu.R[dst] = 0x00u;
     InitializeXRegister();
-    auto expectedX = static_cast<uint16_t>(*cpu.X - 1u);
-    memory[expectedX] = static_cast<uint8_t>(rand());
-    auto expectedValue = memory[expectedX];
+    auto expectedX = static_cast<uint16_t>(*ctx.cpu.X - 1u);
+    ctx.ram[expectedX] = static_cast<uint8_t>(rand());
+    auto expectedValue = ctx.ram[expectedX];
 
-    subject.Execute(static_cast<uint16_t>(opcode | 0x2), cpu, memory);
+    subject.Execute(static_cast<uint16_t>(opcode | 0x2), ctx);
 
-    ASSERT_EQ(cpu.R[dst], expectedValue);
-    ASSERT_EQ(*cpu.X, expectedX);
+    ASSERT_EQ(ctx.cpu.R[dst], expectedValue);
+    ASSERT_EQ(*ctx.cpu.X, expectedX);
 }

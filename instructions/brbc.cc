@@ -41,20 +41,20 @@ namespace avr {
         return cpu.SREG.I == branchIfSet;
     }
 
-    uint32_t BRBCInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t BRBCInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
         auto flagIndex = GetSourceValue(opcode);
 
-        auto shouldBranch = ShouldBranch(opcode, cpu, flagIndex);
+        auto shouldBranch = ShouldBranch(opcode, ctx.cpu, flagIndex);
         _clock.ConsumeCycle();
         if (!shouldBranch)
             return 1;
 
         auto offset = GetDestinationOffset(opcode);
         if (offset & 0x80u)
-            cpu.PC -= (offset & 0x3F);
+            ctx.cpu.PC -= (offset & 0x3F);
         else
-            cpu.PC += offset;
+            ctx.cpu.PC += offset;
 
         _clock.ConsumeCycle();
 

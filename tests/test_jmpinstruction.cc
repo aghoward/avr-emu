@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/jmp.h"
 #include "instructions/opcodes.h"
@@ -16,8 +15,7 @@ class JMPInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         JMPInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -31,15 +29,15 @@ class JMPInstructionTests : public ::testing::Test
             auto pc = static_cast<uint16_t>(
                     static_cast<uint16_t>(rand()) %
                     (static_cast<uint16_t>(AVR_EMU_FLASH_SIZE) - 2u));
-            cpu.PC = pc;
+            ctx.cpu.PC = pc;
             auto shiftedAddress = static_cast<uint16_t>(address >> 1u);
             for (auto i = static_cast<uint16_t>(0u); i < sizeof(shiftedAddress); i++)
-                memory[pc++] = static_cast<uint8_t>((shiftedAddress >> (8u * i)) & 0xFFu);
+                ctx.progMem[pc++] = static_cast<uint8_t>((shiftedAddress >> (8u * i)) & 0xFFu);
         }
 
     public:
         JMPInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -64,8 +62,8 @@ TEST_F(JMPInstructionTests, Execute_LongJumpsToOperand)
             static_cast<uint16_t>(rand()) % static_cast<uint16_t>(AVR_EMU_FLASH_SIZE) & 0xFFFEu);
     SetAddressOperand(address);
 
-    auto cycles = subject.Execute(opcode, cpu, memory);
+    auto cycles = subject.Execute(opcode, ctx);
 
     ASSERT_EQ(cycles, 3u);
-    ASSERT_EQ(cpu.PC, address);
+    ASSERT_EQ(ctx.cpu.PC, address);
 }

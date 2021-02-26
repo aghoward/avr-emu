@@ -26,13 +26,13 @@ namespace avr {
         cpu.SREG.S = cpu.SREG.N ^ cpu.SREG.V;
     }
 
-    uint32_t EORInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t EORInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rr = GetSourceRegister(cpu, opcode);
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rr = GetSourceRegister(ctx.cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
         rd ^= rr;
-        SetRegisterFlags(cpu, rd);
+        SetRegisterFlags(ctx.cpu, rd);
 
         _clock.ConsumeCycle();
         return _cyclesConsumed;

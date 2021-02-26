@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/ijmp.h"
 #include "instructions/opcodes.h"
@@ -16,21 +15,21 @@ class IJMPInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         IJMPInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t InitializeSP()
         {
-            uint16_t sp = static_cast<uint16_t>(rand()) + 2u + cpu.SRAM_BEG;
-            cpu.SP = sp;
-            for (uint16_t i = 0u; i < sizeof(cpu.PC); i++)
-                memory[i] = 0u;
+            uint16_t sp = (static_cast<uint16_t>(rand()) % (AVR_EMU_RAM_SIZE - ctx.cpu.SRAM_BEG))
+                + sizeof(ctx.cpu.PC) + ctx.cpu.SRAM_BEG;
+            ctx.cpu.SP = sp;
+            for (uint16_t i = 0u; i < sizeof(ctx.cpu.PC); i++)
+                ctx.ram[sp - i] = 0u;
             return sp;
         }
 
     public:
         IJMPInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -53,12 +52,12 @@ TEST_F(IJMPInstructionTests, Execute_JumpsToOperand)
     auto opcode = static_cast<uint16_t>(OpCode::IJMP);
     auto address = static_cast<uint16_t>(
             static_cast<uint16_t>(rand()) % static_cast<uint16_t>(AVR_EMU_RAM_SIZE) & 0xFFFEu);
-    cpu.Z = address;
+    ctx.cpu.Z = address;
     auto originalSP = InitializeSP();
 
-    auto cycles = subject.Execute(opcode, cpu, memory);
+    auto cycles = subject.Execute(opcode, ctx);
 
     ASSERT_EQ(cycles, 2u);
-    ASSERT_EQ(cpu.PC, address);
-    ASSERT_EQ(cpu.SP, originalSP);
+    ASSERT_EQ(ctx.cpu.PC, address);
+    ASSERT_EQ(ctx.cpu.SP, originalSP);
 }

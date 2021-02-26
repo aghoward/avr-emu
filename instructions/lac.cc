@@ -11,12 +11,12 @@ namespace avr {
         return cpu.R[index];
     }
 
-    uint32_t LACInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM& mem) const
+    uint32_t LACInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
-        auto z = mem[*cpu.Z];
-        mem[*cpu.Z] &= static_cast<uint8_t>(0xffu - rd);
+        auto z = ctx.ram[*ctx.cpu.Z];
+        ctx.ram[*ctx.cpu.Z] &= static_cast<uint8_t>(0xffu - rd);
         _clock.ConsumeCycle();
         rd = z;
         _clock.ConsumeCycle();

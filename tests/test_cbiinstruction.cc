@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/cbi.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class CBIInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         CBIInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -37,7 +35,7 @@ class CBIInstructionTests : public ::testing::Test
 
     public:
         CBIInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -59,20 +57,20 @@ TEST_F(CBIInstructionTests, Execute_GivenBitClear_IsNoop)
 {
     auto [opcode, src, dst] = GetRegisters();
     uint8_t expectedValue = 0xFFu ^ static_cast<uint8_t>(0x1u << src);
-    cpu.GPIO[dst] = expectedValue;
+    ctx.cpu.GPIO[dst] = expectedValue;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.GPIO[dst], expectedValue);
+    ASSERT_EQ(ctx.cpu.GPIO[dst], expectedValue);
 }
 
 TEST_F(CBIInstructionTests, Execute_GivenBitSet_ClearsBit)
 {
     auto [opcode, src, dst] = GetRegisters();
     uint8_t expectedValue = 0xFFu ^ static_cast<uint8_t>(0x1u << src);
-    cpu.GPIO[dst] = static_cast<uint8_t>(0xFFu);
+    ctx.cpu.GPIO[dst] = static_cast<uint8_t>(0xFFu);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.GPIO[dst], expectedValue);
+    ASSERT_EQ(ctx.cpu.GPIO[dst], expectedValue);
 }

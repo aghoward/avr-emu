@@ -30,19 +30,19 @@ namespace avr {
         cpu.SREG.C = carry;
     }
 
-    uint32_t FMULInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t FMULInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rr = GetSourceRegister(cpu, opcode);
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rr = GetSourceRegister(ctx.cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
         auto result = static_cast<uint16_t>(static_cast<uint16_t>(rr) * static_cast<uint16_t>(rd));
         auto carry = (0x8000u & result) != 0u;
         result = result << 1u;
 
-        SetRegisterFlags(cpu, result, carry);
+        SetRegisterFlags(ctx.cpu, result, carry);
 
         _clock.ConsumeCycle();
-        WriteResult(cpu, result);
+        WriteResult(ctx.cpu, result);
         _clock.ConsumeCycle();
 
         return 2u;

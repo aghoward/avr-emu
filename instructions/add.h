@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include "core/executioncontext.h"
 #include "core/iclock.h"
 #include "instructions/instructionexecutor.h"
 
@@ -23,7 +24,7 @@ namespace avr {
                 : _clock(clock)
             {}
 
-            uint32_t Execute(uint16_t opcode, CPU& cpu, SRAM& memory) const override;
+            uint32_t Execute(uint16_t opcode, ExecutionContext& ctx) const override;
             bool Matches(uint16_t opcode) const override;
     };
 }

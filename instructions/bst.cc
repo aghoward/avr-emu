@@ -17,12 +17,12 @@ namespace avr {
         return cpu.R[value];
     }
 
-    uint32_t BSTInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t BSTInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
         auto bitShift = GetSourceValue(opcode);
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
 
-        cpu.SREG.T = (rd >> bitShift) == 1u;
+        ctx.cpu.SREG.T = (rd >> bitShift) == 1u;
         _clock.ConsumeCycle();
 
         return _cyclesConsumed;

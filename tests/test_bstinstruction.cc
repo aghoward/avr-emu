@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/bst.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class BSTInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         BSTInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -37,7 +35,7 @@ class BSTInstructionTests : public ::testing::Test
 
     public:
         BSTInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -58,21 +56,21 @@ TEST_F(BSTInstructionTests, Matches_GivenBSTOpCode_ReturnsTrue)
 TEST_F(BSTInstructionTests, Execute_GivenBitClear_ClearsBit)
 {
     auto [opcode, src, dst] = GetRegisters();
-    cpu.R[dst] = 0xFFu ^ static_cast<uint8_t>(0x1u << src);
-    cpu.SREG.T = true;
+    ctx.cpu.R[dst] = 0xFFu ^ static_cast<uint8_t>(0x1u << src);
+    ctx.cpu.SREG.T = true;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_FALSE(cpu.SREG.T);
+    ASSERT_FALSE(ctx.cpu.SREG.T);
 }
 
 TEST_F(BSTInstructionTests, Execute_GivenBitSet_SetsBit)
 {
     auto [opcode, src, dst] = GetRegisters();
-    cpu.R[dst] = static_cast<uint8_t>(0x1u << src);
-    cpu.SREG.T = false;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(0x1u << src);
+    ctx.cpu.SREG.T = false;
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_TRUE(cpu.SREG.T);
+    ASSERT_TRUE(ctx.cpu.SREG.T);
 }

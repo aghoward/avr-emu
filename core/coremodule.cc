@@ -15,9 +15,7 @@ namespace avr
     void CoreModule::load(cdif::Container& ctx)
     {
         ctx.bind<Clock>().as<IClock>().in<cdif::Scope::Singleton>().build();
-        ctx.bind<SRAM>().in<cdif::Scope::Singleton>().build();
-        ctx.bind<ProgramMemory>().in<cdif::Scope::Singleton>().build();
-        ctx.bind<CPU, SRAM&>().in<cdif::Scope::Singleton>().build();
+        ctx.bind<ExecutionContext>().in<cdif::Scope::Singleton>().build();
 
         ctx
             .bind<Executor,

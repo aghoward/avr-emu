@@ -1,5 +1,4 @@
-#include "core/cpu.h"
-#include "core/memory.h"
+#include "core/executioncontext.h"
 #include "core/noopclock.h"
 #include "instructions/bld.h"
 #include "instructions/opcodes.h"
@@ -17,8 +16,7 @@ class BLDInstructionTests : public ::testing::Test
     protected:
         NoopClock clock;
         BLDInstruction subject;
-        SRAM memory;
-        CPU cpu;
+        ExecutionContext ctx;
 
         uint16_t GetOpCode(uint8_t src, uint8_t dst) const
         {
@@ -37,7 +35,7 @@ class BLDInstructionTests : public ::testing::Test
 
     public:
         BLDInstructionTests() :
-            clock(), subject(clock), memory(), cpu(memory)
+            clock(), subject(clock), ctx()
         {
             srand(static_cast<unsigned int>(time(NULL)));
         }
@@ -58,21 +56,21 @@ TEST_F(BLDInstructionTests, Matches_GivenBLDOpCode_ReturnsTrue)
 TEST_F(BLDInstructionTests, Execute_GivenFlagSet_SetsBitInDestination)
 {
     auto [opcode, src, dst] = GetRegisters();
-    cpu.SREG.T = true;
-    cpu.R[dst] &= 0xFFu ^ static_cast<uint8_t>(0x1u << src);
+    ctx.cpu.SREG.T = true;
+    ctx.cpu.R[dst] &= 0xFFu ^ static_cast<uint8_t>(0x1u << src);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_NE(cpu.R[dst] & (0x1u << src), 0x0u);
+    ASSERT_NE(ctx.cpu.R[dst] & (0x1u << src), 0x0u);
 }
 
 TEST_F(BLDInstructionTests, Execute_GivenFlagClear_ClearsBitInDestination)
 {
     auto [opcode, src, dst] = GetRegisters();
-    cpu.SREG.T = false;
-    cpu.R[dst] |= static_cast<uint8_t>(0x1u << src);
+    ctx.cpu.SREG.T = false;
+    ctx.cpu.R[dst] |= static_cast<uint8_t>(0x1u << src);
 
-    subject.Execute(opcode, cpu, memory);
+    subject.Execute(opcode, ctx);
 
-    ASSERT_EQ(cpu.R[dst] & (0x1u << src), 0x0u);
+    ASSERT_EQ(ctx.cpu.R[dst] & (0x1u << src), 0x0u);
 }

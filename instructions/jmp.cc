@@ -4,7 +4,7 @@
 #include <cstdint>
 
 namespace avr {
-    uint16_t JMPInstruction::GetDestinationAddress(CPU& cpu, SRAM& mem) const
+    uint16_t JMPInstruction::GetDestinationAddress(CPU& cpu, ProgramMemory& mem) const
     {
         auto address = static_cast<uint16_t>(0u);
         for (auto i = 0u; i < sizeof(address); i++)
@@ -16,9 +16,9 @@ namespace avr {
         return (address << 1u);
     }
 
-    uint32_t JMPInstruction::Execute(uint16_t, CPU& cpu, SRAM& mem) const
+    uint32_t JMPInstruction::Execute(uint16_t, ExecutionContext& ctx) const
     {
-        cpu.PC = GetDestinationAddress(cpu, mem);
+        ctx.cpu.PC = GetDestinationAddress(ctx.cpu, ctx.progMem);
         _clock.ConsumeCycle();
         return _cyclesConsumed;
     }

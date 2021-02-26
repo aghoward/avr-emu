@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core/executioncontext.h"
 #include "core/iclock.h"
 #include "instructions/instructionexecutor.h"
 
@@ -11,14 +12,14 @@ namespace avr {
             IClock& _clock;
             const uint32_t _cyclesConsumed = 3u;
 
-            uint16_t GetDestinationAddress(CPU& cpu, SRAM& mem) const;
+            uint16_t GetDestinationAddress(CPU& cpu, ProgramMemory& mem) const;
 
         public:
             JMPInstruction(IClock& clock)
                 : _clock(clock)
             {}
 
-            uint32_t Execute(uint16_t opcode, CPU& cpu, SRAM& memory) const override;
+            uint32_t Execute(uint16_t opcode, ExecutionContext& ctx) const override;
             bool Matches(uint16_t opcode) const override;
     };
 }

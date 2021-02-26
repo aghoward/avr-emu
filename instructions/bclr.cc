@@ -10,27 +10,27 @@ namespace avr {
         return static_cast<uint8_t>((opcode >> 4) & (mask >> 4));
     }
 
-    uint32_t BCLRInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t BCLRInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
         auto src = GetSource(opcode);
         auto flagValue = (opcode & 0x0080u) == 0u;
 
         if (src == 0u)
-            cpu.SREG.C = flagValue;
+            ctx.cpu.SREG.C = flagValue;
         else if (src == 1u)
-            cpu.SREG.Z = flagValue;
+            ctx.cpu.SREG.Z = flagValue;
         else if (src == 2u)
-            cpu.SREG.N = flagValue;
+            ctx.cpu.SREG.N = flagValue;
         else if (src == 3u)
-            cpu.SREG.V = flagValue;
+            ctx.cpu.SREG.V = flagValue;
         else if (src == 4u)
-            cpu.SREG.S = flagValue;
+            ctx.cpu.SREG.S = flagValue;
         else if (src == 5u)
-            cpu.SREG.H = flagValue;
+            ctx.cpu.SREG.H = flagValue;
         else if (src == 6u)
-            cpu.SREG.T = flagValue;
+            ctx.cpu.SREG.T = flagValue;
         else if (src == 7u)
-            cpu.SREG.I = flagValue;
+            ctx.cpu.SREG.I = flagValue;
 
         _clock.ConsumeCycle();
 

@@ -18,14 +18,13 @@ namespace avr {
         cpu.SREG.S = cpu.SREG.V ^ cpu.SREG.N;
         cpu.SREG.Z = result == 0u;
         cpu.SREG.C = true;
-
     }
 
-    uint32_t COMInstruction::Execute(uint16_t opcode, CPU& cpu, SRAM&) const
+    uint32_t COMInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rd = GetDestinationRegister(cpu, opcode);
+        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
         rd ^= 0xFFu;
-        SetStatusRegisters(cpu, rd);
+        SetStatusRegisters(ctx.cpu, rd);
         _clock.ConsumeCycle();
         return _cyclesConsumed;
     }

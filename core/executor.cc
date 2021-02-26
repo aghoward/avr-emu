@@ -29,16 +29,16 @@ namespace avr {
         return *it;
     }
 
-    void Executor::Execute(CPU& cpu, ProgramMemory& progMem, SRAM& sram, uint32_t cyclesRequested) const {
+    void Executor::Execute(ExecutionContext& ctx, uint32_t cyclesRequested) const {
         using namespace std::string_literals;
         auto cyclesConsumed = 0u;
 
         while (cyclesConsumed < cyclesRequested)
         {
-            auto opcode = FetchWord(progMem, cpu.PC);
-            cpu.PC += sizeof(cpu.PC);
+            auto opcode = FetchWord(ctx.progMem, ctx.cpu.PC);
+            ctx.cpu.PC += sizeof(ctx.cpu.PC);
             const auto& instruction_executor = GetExecutor(opcode);
-            cyclesConsumed += instruction_executor->Execute(opcode, cpu, sram);
+            cyclesConsumed += instruction_executor->Execute(opcode, ctx);
         }
     }
 }
