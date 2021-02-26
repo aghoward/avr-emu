@@ -42,6 +42,7 @@ namespace avr {
         // Read / Write
         LDS  = 0x9000,
         IN   = 0xB000,
+        LAC  = 0x9206,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -85,5 +86,6 @@ namespace avr {
         // Read / Write
         LDS  = 0xFE0F,
         IN   = 0xF800,
+        LAC  = 0xFE0F,
     };
 }
