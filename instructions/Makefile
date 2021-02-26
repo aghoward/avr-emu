@@ -32,6 +32,7 @@ OBJECTS =${OBJ_DIR}/notimplemented.o \
 		 ${OBJ_DIR}/lac.o \
 		 ${OBJ_DIR}/las.o \
 		 ${OBJ_DIR}/lat.o \
+		 ${OBJ_DIR}/ld.o \
 		 ${OBJ_DIR}/instructionmodule.o
 
 LIB_DIR =../lib

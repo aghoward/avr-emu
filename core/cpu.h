@@ -29,6 +29,34 @@ namespace avr {
                 _base[i] = (value >> (i * 8u)) & 0xFFu;
             return value;
         }
+
+        uint16_t operator--()
+        {
+            auto value = static_cast<uint16_t>(this->operator*() - 1u);
+            *this = value;
+            return value;
+        }
+
+        uint16_t operator++()
+        {
+            auto value = static_cast<uint16_t>(this->operator*() + 1u);
+            *this = value;
+            return value;
+        }
+
+        uint16_t operator--(int)
+        {
+            auto value = this->operator*();
+            *this = static_cast<uint16_t>(value - 1u);
+            return value;
+        }
+
+        uint16_t operator++(int)
+        {
+            auto value = this->operator*();
+            *this = static_cast<uint16_t>(value + 1u);
+            return value;
+        }
     };
 
     struct CPU {

@@ -45,6 +45,7 @@ namespace avr {
         LAC  = 0x9206,
         LAS  = 0x9205,
         LAT  = 0x9207,
+        LD   = 0x900C,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -91,5 +92,6 @@ namespace avr {
         LAC  = 0xFE0F,
         LAS  = 0xFE0F,
         LAT  = 0xFE0F,
+        LD   = 0xFE0C,
     };
 }
