@@ -49,6 +49,7 @@ namespace avr {
         LDD  = 0x8008,
         LDDZ = 0x8000,
         LDI  = 0xE000,
+        LPM  = 0x95C8,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -99,5 +100,6 @@ namespace avr {
         LDD  = 0xFE0F,
         LDDZ = 0xFE0F,
         LDI  = 0xF000,
+        LPM  = 0xFFFF,
     };
 }
