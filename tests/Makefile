@@ -27,7 +27,8 @@ TEST_OBJS = ${OBJ_DIR}/test_addinstruction.o \
 			${OBJ_DIR}/test_ininstruction.o \
 			${OBJ_DIR}/test_incinstruction.o \
 			${OBJ_DIR}/test_jmpinstruction.o \
-			${OBJ_DIR}/test_lacinstruction.o
+			${OBJ_DIR}/test_lacinstruction.o \
+			${OBJ_DIR}/test_lasinstruction.o
 
 all: ${OBJ_DIR} unittests
 
