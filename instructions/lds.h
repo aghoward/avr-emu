@@ -8,16 +8,16 @@
 #include <cstdint>
 
 namespace avr {
-    class LDIInstruction: public InstructionExecutor {
+    class LDSInstruction: public InstructionExecutor {
         private:
             IClock& _clock;
-            const uint32_t _cyclesConsumed = 1u;
+            const uint32_t _cyclesConsumed = 2u;
 
-            uint8_t GetImmediate(uint16_t opcode) const;
+            uint16_t GetImmediate(ExecutionContext& ctx) const;
             uint8_t& GetDestinationRegister(CPU& cpu, uint16_t opcode) const;
 
         public:
-            LDIInstruction(IClock& clock)
+            LDSInstruction(IClock& clock)
                 : _clock(clock)
             {}
 
