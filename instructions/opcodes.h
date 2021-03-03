@@ -14,6 +14,7 @@ namespace avr {
         FMULS  = 0x0380,
         FMULSU = 0x0388,
         INC    = 0x9403,
+        LSR    = 0x9406,
 
         // Logic
         AND  = 0x2000,
@@ -65,6 +66,7 @@ namespace avr {
         FMULS  = 0xFF88,
         FMULSU = 0xFF88,
         INC    = 0xFE0F,
+        LSR    = 0xFE0F,
 
         // Logic
         AND  = 0xFC00,
