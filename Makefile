@@ -9,6 +9,9 @@ LIBRARIES =./lib/libinstructions.a ./lib/libcore.a
 
 all: ${LIB_DIR} ${OBJ_DIR} avr-emu
 
+test.o: test.s
+	avr-gcc -mmcu=atmega328p -c -o $@ $<
+
 avr-emu: main.cc ${OBJECTS} ${LIBRARIES}
 	$(CC) ${CXX_FLAGS} -o $@ $< ${OBJECTS} ${LIBRARIES} ${LD_FLAGS}
 
