@@ -37,6 +37,7 @@
 #include "instructions/lpm.h"
 #include "instructions/lsr.h"
 #include "instructions/mov.h"
+#include "instructions/movw.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -182,6 +183,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("MOV")
             .build();
+        ctx.bind<MOVWInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("MOVW")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -223,6 +228,7 @@ namespace avr {
                 std::unique_ptr<LPMInstruction>,
                 std::unique_ptr<LSRInstruction>,
                 std::unique_ptr<MOVInstruction>,
+                std::unique_ptr<MOVWInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

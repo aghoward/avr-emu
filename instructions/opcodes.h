@@ -52,6 +52,7 @@ namespace avr {
         LDI  = 0xE000,
         LPM  = 0x95C8,
         MOV  = 0x2C00,
+        MOVW = 0x0100,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -105,5 +106,6 @@ namespace avr {
         LDI  = 0xF000,
         LPM  = 0xFFFF,
         MOV  = 0xFC00,
+        MOVW = 0xFF00,
     };
 }
