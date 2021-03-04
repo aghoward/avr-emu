@@ -27,8 +27,10 @@ ${OBJ_DIR}/%.o: %.cc %.h
 ${LIB_DIR}/lib%.a: ./%
 	make ${MAKEFLAGS} -C $<
 
-tests: ./tests/*.cc ${LIB_DIR} ${LIBRARIES}
+tests/unittests: ./tests/*.cc ${LIB_DIR} ${LIBRARIES}
 	make ${MAKEFLAGS} -C tests
+
+tests: tests/unittests
 
 clean:
 	make ${MAKEFLAGS} -C instructions clean
