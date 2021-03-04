@@ -39,6 +39,7 @@
 #include "instructions/mov.h"
 #include "instructions/movw.h"
 #include "instructions/mul.h"
+#include "instructions/muls.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -192,6 +193,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("MUL")
             .build();
+        ctx.bind<MULSInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("MULS")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -235,6 +240,7 @@ namespace avr {
                 std::unique_ptr<MOVInstruction>,
                 std::unique_ptr<MOVWInstruction>,
                 std::unique_ptr<MULInstruction>,
+                std::unique_ptr<MULSInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }
