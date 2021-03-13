@@ -40,7 +40,8 @@ TEST_OBJS = ${OBJ_DIR}/test_addinstruction.o \
 			${OBJ_DIR}/test_movinstruction.o \
 			${OBJ_DIR}/test_movwinstruction.o \
 			${OBJ_DIR}/test_mulinstruction.o \
-			${OBJ_DIR}/test_mulsinstruction.o
+			${OBJ_DIR}/test_mulsinstruction.o \
+			${OBJ_DIR}/test_mulsuinstruction.o
 
 all: ${OBJ_DIR} unittests
 
