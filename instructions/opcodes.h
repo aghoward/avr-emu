@@ -34,6 +34,7 @@ namespace avr {
         CP    = 0x1400,
         CPC   = 0x0400,
         CPI   = 0x3000,
+        NOP   = 0x0000,
 
         // Branching
         BRBC  = 0xF400,
@@ -92,6 +93,7 @@ namespace avr {
         CP    = 0xFC00,
         CPC   = 0xFC00,
         CPI   = 0xF000,
+        NOP   = 0xFFFF,
 
         // Branching
         BRBC  = 0xFC00,
