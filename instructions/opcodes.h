@@ -22,6 +22,7 @@ namespace avr {
         // Logic
         AND  = 0x2000,
         ANDI = 0x7000,
+        NEG  = 0x9401,
 
         // MISC
         BCLR  = 0x9488,
@@ -79,6 +80,7 @@ namespace avr {
         // Logic
         AND  = 0xFC00,
         ANDI = 0xF000,
+        NEG  = 0xFE0F,
 
         // MISC
         BCLR  = 0xFF8F,
