@@ -22,6 +22,8 @@ namespace avr {
         // Logic
         AND  = 0x2000,
         ANDI = 0x7000,
+        NEG  = 0x9401,
+        OR   = 0x2800,
 
         // MISC
         BCLR  = 0x9488,
@@ -33,6 +35,7 @@ namespace avr {
         CP    = 0x1400,
         CPC   = 0x0400,
         CPI   = 0x3000,
+        NOP   = 0x0000,
 
         // Branching
         BRBC  = 0xF400,
@@ -79,6 +82,8 @@ namespace avr {
         // Logic
         AND  = 0xFC00,
         ANDI = 0xF000,
+        NEG  = 0xFE0F,
+        OR   = 0xFC00,
 
         // MISC
         BCLR  = 0xFF8F,
@@ -90,6 +95,7 @@ namespace avr {
         CP    = 0xFC00,
         CPC   = 0xFC00,
         CPI   = 0xF000,
+        NOP   = 0xFFFF,
 
         // Branching
         BRBC  = 0xFC00,
