@@ -37,7 +37,8 @@ class CALLInstructionTests : public ::testing::Test
 
         uint16_t InitializeSP()
         {
-            uint16_t sp = static_cast<uint16_t>(rand()) + 2u + ctx.cpu.SRAM_BEG;
+            auto usableRamSize = static_cast<uint16_t>(AVR_EMU_RAM_SIZE - ctx.cpu.SRAM_BEG);
+            uint16_t sp = static_cast<uint16_t>(rand() % usableRamSize) + 2u + ctx.cpu.SRAM_BEG;
             ctx.cpu.SP = sp;
             for (uint16_t i = 0u; i < sizeof(ctx.cpu.PC); i++)
                 ctx.ram[i] = 0u;
