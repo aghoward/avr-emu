@@ -47,6 +47,7 @@
 #include "instructions/ori.h"
 #include "instructions/out.h"
 #include "instructions/pop.h"
+#include "instructions/push.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -232,6 +233,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("POP")
             .build();
+        ctx.bind<PUSHInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("PUSH")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -283,6 +288,7 @@ namespace avr {
                 std::unique_ptr<ORIInstruction>,
                 std::unique_ptr<OUTInstruction>,
                 std::unique_ptr<POPInstruction>,
+                std::unique_ptr<PUSHInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

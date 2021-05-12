@@ -50,6 +50,7 @@ OBJECTS =${OBJ_DIR}/notimplemented.o \
 		 ${OBJ_DIR}/ori.o \
 		 ${OBJ_DIR}/out.o \
 		 ${OBJ_DIR}/pop.o \
+		 ${OBJ_DIR}/push.o \
 		 ${OBJ_DIR}/instructionmodule.o
 
 LIB_DIR =../lib

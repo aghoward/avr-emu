@@ -62,6 +62,7 @@ namespace avr {
         MOVW = 0x0100,
         OUT  = 0xB800,
         POP  = 0x900F,
+        PUSH = 0x920F,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -125,5 +126,6 @@ namespace avr {
         MOVW = 0xFF00,
         OUT  = 0xF800,
         POP  = 0xFE0F,
+        PUSH = 0xFE0F,
     };
 }
