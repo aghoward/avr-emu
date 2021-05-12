@@ -23,6 +23,7 @@ namespace avr {
     {
         cpu.SREG.V = 0;
         cpu.SREG.N = (result & 0x80) != 0u;
+        cpu.SREG.S = cpu.SREG.N;
         cpu.SREG.Z = result == 0;
     }
 
