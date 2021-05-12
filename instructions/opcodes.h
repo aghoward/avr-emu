@@ -24,6 +24,7 @@ namespace avr {
         ANDI = 0x7000,
         NEG  = 0x9401,
         OR   = 0x2800,
+        ORI  = 0x6000,
 
         // MISC
         BCLR  = 0x9488,
@@ -84,6 +85,7 @@ namespace avr {
         ANDI = 0xF000,
         NEG  = 0xFE0F,
         OR   = 0xFC00,
+        ORI  = 0xF000,
 
         // MISC
         BCLR  = 0xFF8F,

@@ -44,6 +44,7 @@
 #include "instructions/neg.h"
 #include "instructions/nop.h"
 #include "instructions/or.h"
+#include "instructions/ori.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -217,6 +218,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("OR")
             .build();
+        ctx.bind<ORIInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("ORI")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -265,6 +270,7 @@ namespace avr {
                 std::unique_ptr<NEGInstruction>,
                 std::unique_ptr<NOPInstruction>,
                 std::unique_ptr<ORInstruction>,
+                std::unique_ptr<ORIInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

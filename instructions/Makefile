@@ -47,6 +47,7 @@ OBJECTS =${OBJ_DIR}/notimplemented.o \
 		 ${OBJ_DIR}/neg.o \
 		 ${OBJ_DIR}/nop.o \
 		 ${OBJ_DIR}/or.o \
+		 ${OBJ_DIR}/ori.o \
 		 ${OBJ_DIR}/instructionmodule.o
 
 LIB_DIR =../lib
