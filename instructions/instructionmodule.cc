@@ -48,6 +48,7 @@
 #include "instructions/out.h"
 #include "instructions/pop.h"
 #include "instructions/push.h"
+#include "instructions/rcall.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -237,6 +238,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("PUSH")
             .build();
+        ctx.bind<RCALLInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("RCALL")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -289,6 +294,7 @@ namespace avr {
                 std::unique_ptr<OUTInstruction>,
                 std::unique_ptr<POPInstruction>,
                 std::unique_ptr<PUSHInstruction>,
+                std::unique_ptr<RCALLInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

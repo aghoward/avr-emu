@@ -46,6 +46,7 @@ namespace avr {
         CPSE  = 0x1000,
         IJMP  = 0x9409,
         JMP   = 0x940C,
+        RCALL = 0xD000,
 
         // Read / Write
         LDS  = 0x9000,
@@ -110,6 +111,7 @@ namespace avr {
         CPSE  = 0xFC00,
         IJMP  = 0xFFFF,
         JMP   = 0xFE0E,
+        RCALL = 0xF000,
 
         // Read / Write
         LDS  = 0xFE0F,
