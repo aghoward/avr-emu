@@ -50,6 +50,7 @@
 #include "instructions/push.h"
 #include "instructions/rcall.h"
 #include "instructions/ret.h"
+#include "instructions/reti.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -247,6 +248,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("RET")
             .build();
+        ctx.bind<RETIInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("RETI")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -301,6 +306,7 @@ namespace avr {
                 std::unique_ptr<PUSHInstruction>,
                 std::unique_ptr<RCALLInstruction>,
                 std::unique_ptr<RETInstruction>,
+                std::unique_ptr<RETIInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

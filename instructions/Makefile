@@ -53,6 +53,7 @@ OBJECTS =${OBJ_DIR}/notimplemented.o \
 		 ${OBJ_DIR}/push.o \
 		 ${OBJ_DIR}/rcall.o \
 		 ${OBJ_DIR}/ret.o \
+		 ${OBJ_DIR}/reti.o \
 		 ${OBJ_DIR}/instructionmodule.o
 
 LIB_DIR =../lib
