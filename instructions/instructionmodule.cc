@@ -51,6 +51,7 @@
 #include "instructions/rcall.h"
 #include "instructions/ret.h"
 #include "instructions/reti.h"
+#include "instructions/rjmp.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -252,6 +253,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("RETI")
             .build();
+        ctx.bind<RJMPInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("RJMP")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -307,6 +312,7 @@ namespace avr {
                 std::unique_ptr<RCALLInstruction>,
                 std::unique_ptr<RETInstruction>,
                 std::unique_ptr<RETIInstruction>,
+                std::unique_ptr<RJMPInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

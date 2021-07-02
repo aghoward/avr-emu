@@ -49,6 +49,7 @@ namespace avr {
         RCALL = 0xD000,
         RET   = 0x9508,
         RETI  = 0x9518,
+        RJMP  = 0xC000,
 
         // Read / Write
         LDS  = 0x9000,
@@ -116,6 +117,7 @@ namespace avr {
         RCALL = 0xF000,
         RET   = 0xFFFF,
         RETI  = 0xFFFF,
+        RJMP  = 0xF000,
 
         // Read / Write
         LDS  = 0xFE0F,
