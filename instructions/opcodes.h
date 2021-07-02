@@ -24,6 +24,7 @@ namespace avr {
         ANDI = 0x7000,
         NEG  = 0x9401,
         OR   = 0x2800,
+        ORI  = 0x6000,
 
         // MISC
         BCLR  = 0x9488,
@@ -45,6 +46,10 @@ namespace avr {
         CPSE  = 0x1000,
         IJMP  = 0x9409,
         JMP   = 0x940C,
+        RCALL = 0xD000,
+        RET   = 0x9508,
+        RETI  = 0x9518,
+        RJMP  = 0xC000,
 
         // Read / Write
         LDS  = 0x9000,
@@ -59,6 +64,9 @@ namespace avr {
         LPM  = 0x95C8,
         MOV  = 0x2C00,
         MOVW = 0x0100,
+        OUT  = 0xB800,
+        POP  = 0x900F,
+        PUSH = 0x920F,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -84,6 +92,7 @@ namespace avr {
         ANDI = 0xF000,
         NEG  = 0xFE0F,
         OR   = 0xFC00,
+        ORI  = 0xF000,
 
         // MISC
         BCLR  = 0xFF8F,
@@ -105,6 +114,10 @@ namespace avr {
         CPSE  = 0xFC00,
         IJMP  = 0xFFFF,
         JMP   = 0xFE0E,
+        RCALL = 0xF000,
+        RET   = 0xFFFF,
+        RETI  = 0xFFFF,
+        RJMP  = 0xF000,
 
         // Read / Write
         LDS  = 0xFE0F,
@@ -119,5 +132,8 @@ namespace avr {
         LPM  = 0xFFFF,
         MOV  = 0xFC00,
         MOVW = 0xFF00,
+        OUT  = 0xF800,
+        POP  = 0xFE0F,
+        PUSH = 0xFE0F,
     };
 }

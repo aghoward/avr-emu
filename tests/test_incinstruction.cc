@@ -55,7 +55,7 @@ TEST_F(INCInstructionTests, Execute_GivenValue_IncrementsValue)
 {
     auto [opcode, dst] = GetRegisters();
     ctx.cpu.R[dst] = static_cast<uint8_t>(rand());
-    auto expected = ctx.cpu.R[dst] + 1u;
+    auto expected = static_cast<uint8_t>(ctx.cpu.R[dst] + 1u);
 
     subject.Execute(opcode, ctx);
 

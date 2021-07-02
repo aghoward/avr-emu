@@ -44,6 +44,14 @@
 #include "instructions/neg.h"
 #include "instructions/nop.h"
 #include "instructions/or.h"
+#include "instructions/ori.h"
+#include "instructions/out.h"
+#include "instructions/pop.h"
+#include "instructions/push.h"
+#include "instructions/rcall.h"
+#include "instructions/ret.h"
+#include "instructions/reti.h"
+#include "instructions/rjmp.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -217,6 +225,38 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("OR")
             .build();
+        ctx.bind<ORIInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("ORI")
+            .build();
+        ctx.bind<OUTInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("OUT")
+            .build();
+        ctx.bind<POPInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("POP")
+            .build();
+        ctx.bind<PUSHInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("PUSH")
+            .build();
+        ctx.bind<RCALLInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("RCALL")
+            .build();
+        ctx.bind<RETInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("RET")
+            .build();
+        ctx.bind<RETIInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("RETI")
+            .build();
+        ctx.bind<RJMPInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("RJMP")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -265,6 +305,14 @@ namespace avr {
                 std::unique_ptr<NEGInstruction>,
                 std::unique_ptr<NOPInstruction>,
                 std::unique_ptr<ORInstruction>,
+                std::unique_ptr<ORIInstruction>,
+                std::unique_ptr<OUTInstruction>,
+                std::unique_ptr<POPInstruction>,
+                std::unique_ptr<PUSHInstruction>,
+                std::unique_ptr<RCALLInstruction>,
+                std::unique_ptr<RETInstruction>,
+                std::unique_ptr<RETIInstruction>,
+                std::unique_ptr<RJMPInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

@@ -44,7 +44,15 @@ TEST_OBJS = ${OBJ_DIR}/test_addinstruction.o \
 			${OBJ_DIR}/test_mulsuinstruction.o \
 			${OBJ_DIR}/test_neginstruction.o \
 			${OBJ_DIR}/test_nopinstruction.o \
-			${OBJ_DIR}/test_orinstruction.o
+			${OBJ_DIR}/test_orinstruction.o \
+			${OBJ_DIR}/test_oriinstruction.o \
+			${OBJ_DIR}/test_outinstruction.o \
+			${OBJ_DIR}/test_popinstruction.o \
+			${OBJ_DIR}/test_pushinstruction.o \
+			${OBJ_DIR}/test_rcallinstruction.o \
+			${OBJ_DIR}/test_retinstruction.o \
+			${OBJ_DIR}/test_retiinstruction.o \
+			${OBJ_DIR}/test_rjmpinstruction.o
 
 all: ${OBJ_DIR} unittests
 
