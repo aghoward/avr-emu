@@ -1,0 +1,680 @@
+[
+{
+  "directory": "/home/howard/repos/avr-emu/build",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/core -I/home/howard/repos/avr-emu/instructions -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/.. -std=gnu++20 -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -pedantic -Wconversion -Wsign-conversion -Wmisleading-indentation -o CMakeFiles/avr-emu.dir/main.cc.o -c /home/howard/repos/avr-emu/main.cc",
+  "file": "/home/howard/repos/avr-emu/main.cc",
+  "output": "CMakeFiles/avr-emu.dir/main.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/cdif/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/cdif/tests -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/tests.dir/container_tests.cc.o -c /home/howard/repos/avr-emu/cdif/tests/container_tests.cc",
+  "file": "/home/howard/repos/avr-emu/cdif/tests/container_tests.cc",
+  "output": "cdif/tests/CMakeFiles/tests.dir/container_tests.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/cdif/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/cdif/tests -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/tests.dir/factoryregistrationbuilder_tests.cc.o -c /home/howard/repos/avr-emu/cdif/tests/factoryregistrationbuilder_tests.cc",
+  "file": "/home/howard/repos/avr-emu/cdif/tests/factoryregistrationbuilder_tests.cc",
+  "output": "cdif/tests/CMakeFiles/tests.dir/factoryregistrationbuilder_tests.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/cdif/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/cdif/tests -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/tests.dir/interfaceregistrationbuilder_tests.cc.o -c /home/howard/repos/avr-emu/cdif/tests/interfaceregistrationbuilder_tests.cc",
+  "file": "/home/howard/repos/avr-emu/cdif/tests/interfaceregistrationbuilder_tests.cc",
+  "output": "cdif/tests/CMakeFiles/tests.dir/interfaceregistrationbuilder_tests.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/cdif/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/cdif/tests -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/tests.dir/listregistrationbuilder_tests.cc.o -c /home/howard/repos/avr-emu/cdif/tests/listregistrationbuilder_tests.cc",
+  "file": "/home/howard/repos/avr-emu/cdif/tests/listregistrationbuilder_tests.cc",
+  "output": "cdif/tests/CMakeFiles/tests.dir/listregistrationbuilder_tests.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/cdif/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/cdif/tests -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/tests.dir/registrar_tests.cc.o -c /home/howard/repos/avr-emu/cdif/tests/registrar_tests.cc",
+  "file": "/home/howard/repos/avr-emu/cdif/tests/registrar_tests.cc",
+  "output": "cdif/tests/CMakeFiles/tests.dir/registrar_tests.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/cdif/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/cdif/tests -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/tests.dir/registration_tests.cc.o -c /home/howard/repos/avr-emu/cdif/tests/registration_tests.cc",
+  "file": "/home/howard/repos/avr-emu/cdif/tests/registration_tests.cc",
+  "output": "cdif/tests/CMakeFiles/tests.dir/registration_tests.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/cdif/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/cdif/tests -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/tests.dir/typeregistrationbuilder_tests.cc.o -c /home/howard/repos/avr-emu/cdif/tests/typeregistrationbuilder_tests.cc",
+  "file": "/home/howard/repos/avr-emu/cdif/tests/typeregistrationbuilder_tests.cc",
+  "output": "cdif/tests/CMakeFiles/tests.dir/typeregistrationbuilder_tests.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/core",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/core.dir/clock.cc.o -c /home/howard/repos/avr-emu/core/clock.cc",
+  "file": "/home/howard/repos/avr-emu/core/clock.cc",
+  "output": "core/CMakeFiles/core.dir/clock.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/core",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/core.dir/coremodule.cc.o -c /home/howard/repos/avr-emu/core/coremodule.cc",
+  "file": "/home/howard/repos/avr-emu/core/coremodule.cc",
+  "output": "core/CMakeFiles/core.dir/coremodule.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/core",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/core.dir/executor.cc.o -c /home/howard/repos/avr-emu/core/executor.cc",
+  "file": "/home/howard/repos/avr-emu/core/executor.cc",
+  "output": "core/CMakeFiles/core.dir/executor.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/core",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/core.dir/noopclock.cc.o -c /home/howard/repos/avr-emu/core/noopclock.cc",
+  "file": "/home/howard/repos/avr-emu/core/noopclock.cc",
+  "output": "core/CMakeFiles/core.dir/noopclock.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/add.cc.o -c /home/howard/repos/avr-emu/instructions/add.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/add.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/add.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/andi.cc.o -c /home/howard/repos/avr-emu/instructions/andi.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/andi.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/andi.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/bld.cc.o -c /home/howard/repos/avr-emu/instructions/bld.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/bld.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/bld.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/bst.cc.o -c /home/howard/repos/avr-emu/instructions/bst.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/bst.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/bst.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/com.cc.o -c /home/howard/repos/avr-emu/instructions/com.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/com.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/com.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/cpse.cc.o -c /home/howard/repos/avr-emu/instructions/cpse.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/cpse.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/cpse.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/fmul.cc.o -c /home/howard/repos/avr-emu/instructions/fmul.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/fmul.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/fmul.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/in.cc.o -c /home/howard/repos/avr-emu/instructions/in.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/in.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/in.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/jmp.cc.o -c /home/howard/repos/avr-emu/instructions/jmp.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/jmp.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/jmp.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/lat.cc.o -c /home/howard/repos/avr-emu/instructions/lat.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/lat.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/lat.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/lddz.cc.o -c /home/howard/repos/avr-emu/instructions/lddz.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/lddz.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/lddz.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/lpm.cc.o -c /home/howard/repos/avr-emu/instructions/lpm.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/lpm.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/lpm.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/movw.cc.o -c /home/howard/repos/avr-emu/instructions/movw.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/movw.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/movw.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/mulsu.cc.o -c /home/howard/repos/avr-emu/instructions/mulsu.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/mulsu.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/mulsu.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/notimplemented.cc.o -c /home/howard/repos/avr-emu/instructions/notimplemented.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/notimplemented.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/notimplemented.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/out.cc.o -c /home/howard/repos/avr-emu/instructions/out.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/out.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/out.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/rcall.cc.o -c /home/howard/repos/avr-emu/instructions/rcall.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/rcall.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/rcall.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/rjmp.cc.o -c /home/howard/repos/avr-emu/instructions/rjmp.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/rjmp.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/rjmp.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/adiw.cc.o -c /home/howard/repos/avr-emu/instructions/adiw.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/adiw.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/adiw.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/asr.cc.o -c /home/howard/repos/avr-emu/instructions/asr.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/asr.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/asr.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/brbc.cc.o -c /home/howard/repos/avr-emu/instructions/brbc.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/brbc.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/brbc.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/call.cc.o -c /home/howard/repos/avr-emu/instructions/call.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/call.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/call.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/cp.cc.o -c /home/howard/repos/avr-emu/instructions/cp.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/cp.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/cp.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/dec.cc.o -c /home/howard/repos/avr-emu/instructions/dec.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/dec.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/dec.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/icall.cc.o -c /home/howard/repos/avr-emu/instructions/icall.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/icall.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/icall.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/inc.cc.o -c /home/howard/repos/avr-emu/instructions/inc.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/inc.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/inc.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/lac.cc.o -c /home/howard/repos/avr-emu/instructions/lac.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/lac.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/lac.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/ld.cc.o -c /home/howard/repos/avr-emu/instructions/ld.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/ld.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/ld.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/ldi.cc.o -c /home/howard/repos/avr-emu/instructions/ldi.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/ldi.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/ldi.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/lsr.cc.o -c /home/howard/repos/avr-emu/instructions/lsr.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/lsr.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/lsr.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/mul.cc.o -c /home/howard/repos/avr-emu/instructions/mul.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/mul.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/mul.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/neg.cc.o -c /home/howard/repos/avr-emu/instructions/neg.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/neg.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/neg.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/or.cc.o -c /home/howard/repos/avr-emu/instructions/or.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/or.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/or.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/pop.cc.o -c /home/howard/repos/avr-emu/instructions/pop.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/pop.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/pop.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/ret.cc.o -c /home/howard/repos/avr-emu/instructions/ret.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/ret.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/ret.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/and.cc.o -c /home/howard/repos/avr-emu/instructions/and.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/and.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/and.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/bclr.cc.o -c /home/howard/repos/avr-emu/instructions/bclr.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/bclr.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/bclr.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/break.cc.o -c /home/howard/repos/avr-emu/instructions/break.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/break.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/break.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/cbi.cc.o -c /home/howard/repos/avr-emu/instructions/cbi.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/cbi.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/cbi.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/cpi.cc.o -c /home/howard/repos/avr-emu/instructions/cpi.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/cpi.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/cpi.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/eor.cc.o -c /home/howard/repos/avr-emu/instructions/eor.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/eor.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/eor.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/ijmp.cc.o -c /home/howard/repos/avr-emu/instructions/ijmp.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/ijmp.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/ijmp.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/instructionmodule.cc.o -c /home/howard/repos/avr-emu/instructions/instructionmodule.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/instructionmodule.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/instructionmodule.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/las.cc.o -c /home/howard/repos/avr-emu/instructions/las.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/las.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/las.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/ldd.cc.o -c /home/howard/repos/avr-emu/instructions/ldd.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/ldd.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/ldd.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/lds.cc.o -c /home/howard/repos/avr-emu/instructions/lds.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/lds.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/lds.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/mov.cc.o -c /home/howard/repos/avr-emu/instructions/mov.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/mov.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/mov.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/muls.cc.o -c /home/howard/repos/avr-emu/instructions/muls.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/muls.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/muls.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/nop.cc.o -c /home/howard/repos/avr-emu/instructions/nop.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/nop.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/nop.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/ori.cc.o -c /home/howard/repos/avr-emu/instructions/ori.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/ori.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/ori.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/push.cc.o -c /home/howard/repos/avr-emu/instructions/push.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/push.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/push.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/instructions",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/instructions/.. -I/home/howard/repos/avr-emu/cdif/include  -o CMakeFiles/instructions.dir/reti.cc.o -c /home/howard/repos/avr-emu/instructions/reti.cc",
+  "file": "/home/howard/repos/avr-emu/instructions/reti.cc",
+  "output": "instructions/CMakeFiles/instructions.dir/reti.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_addinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_addinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_addinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_addinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_adiwinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_adiwinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_adiwinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_adiwinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_andiinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_andiinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_andiinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_andiinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_andinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_andinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_andinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_andinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_asrinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_asrinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_asrinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_asrinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_bclrinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_bclrinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_bclrinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_bclrinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_bldinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_bldinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_bldinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_bldinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_brbcinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_brbcinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_brbcinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_brbcinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_bstinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_bstinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_bstinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_bstinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_callinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_callinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_callinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_callinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_cbiinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_cbiinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_cbiinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_cbiinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_cominstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_cominstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_cominstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_cominstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_cpiinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_cpiinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_cpiinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_cpiinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_cpinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_cpinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_cpinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_cpinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_cpseinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_cpseinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_cpseinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_cpseinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_decinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_decinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_decinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_decinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_eorinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_eorinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_eorinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_eorinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_fmulinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_fmulinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_fmulinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_fmulinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_icallinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_icallinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_icallinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_icallinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_ijmpinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_ijmpinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_ijmpinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_ijmpinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_incinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_incinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_incinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_incinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_ininstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_ininstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_ininstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_ininstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_jmpinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_jmpinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_jmpinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_jmpinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_lacinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_lacinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_lacinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_lacinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_lasinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_lasinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_lasinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_lasinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_latinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_latinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_latinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_latinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_lddinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_lddinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_lddinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_lddinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_lddzinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_lddzinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_lddzinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_lddzinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_ldiinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_ldiinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_ldiinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_ldiinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_ldinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_ldinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_ldinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_ldinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_ldsinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_ldsinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_ldsinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_ldsinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_lpminstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_lpminstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_lpminstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_lpminstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_lsrinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_lsrinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_lsrinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_lsrinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_movinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_movinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_movinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_movinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_movwinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_movwinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_movwinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_movwinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_mulinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_mulinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_mulinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_mulinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_mulsinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_mulsinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_mulsinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_mulsinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_mulsuinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_mulsuinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_mulsuinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_mulsuinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_neginstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_neginstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_neginstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_neginstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_nopinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_nopinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_nopinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_nopinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_oriinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_oriinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_oriinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_oriinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_orinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_orinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_orinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_orinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_outinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_outinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_outinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_outinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_popinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_popinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_popinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_popinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_pushinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_pushinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_pushinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_pushinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_rcallinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_rcallinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_rcallinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_rcallinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_retiinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_retiinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_retiinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_retiinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_retinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_retinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_retinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_retinstruction.cc.o"
+},
+{
+  "directory": "/home/howard/repos/avr-emu/build/tests",
+  "command": "/usr/bin/c++  -I/home/howard/repos/avr-emu/tests -I/home/howard/repos/avr-emu/tests/.. -I/home/howard/repos/avr-emu/cdif/include -I/home/howard/repos/avr-emu/core/.. -I/home/howard/repos/avr-emu/instructions/..  -o CMakeFiles/unittests.dir/test_rjmpinstruction.cc.o -c /home/howard/repos/avr-emu/tests/test_rjmpinstruction.cc",
+  "file": "/home/howard/repos/avr-emu/tests/test_rjmpinstruction.cc",
+  "output": "tests/CMakeFiles/unittests.dir/test_rjmpinstruction.cc.o"
+}
+]

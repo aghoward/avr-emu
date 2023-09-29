@@ -1,0 +1,60 @@
+add_library(instructions STATIC
+    add.cc
+    andi.cc
+    bld.cc
+    bst.cc
+    com.cc
+    cpse.cc
+    fmul.cc
+    in.cc
+    jmp.cc
+    lat.cc
+    lddz.cc
+    lpm.cc
+    movw.cc
+    mulsu.cc
+    notimplemented.cc
+    out.cc
+    rcall.cc
+    rjmp.cc
+    adiw.cc
+    asr.cc
+    brbc.cc
+    call.cc
+    cp.cc
+    dec.cc
+    icall.cc
+    inc.cc
+    lac.cc
+    ld.cc
+    ldi.cc
+    lsr.cc
+    mul.cc
+    neg.cc
+    or.cc
+    pop.cc
+    ret.cc
+    and.cc
+    bclr.cc
+    break.cc
+    cbi.cc
+    cpi.cc
+    eor.cc
+    ijmp.cc
+    instructionmodule.cc
+    las.cc
+    ldd.cc
+    lds.cc
+    mov.cc
+    muls.cc
+    nop.cc
+    ori.cc
+    push.cc
+    reti.cc
+)
+
+target_include_directories(instructions PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/..
+)
+
+target_link_libraries(instructions PRIVATE cdif)

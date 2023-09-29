@@ -1,0 +1,63 @@
+enable_testing()
+
+include(GoogleTest)
+
+add_executable(unittests
+    test_addinstruction.cc
+    test_adiwinstruction.cc
+    test_andiinstruction.cc
+    test_andinstruction.cc
+    test_asrinstruction.cc
+    test_bclrinstruction.cc
+    test_bldinstruction.cc
+    test_brbcinstruction.cc
+    test_bstinstruction.cc
+    test_callinstruction.cc
+    test_cbiinstruction.cc
+    test_cominstruction.cc
+    test_cpiinstruction.cc
+    test_cpinstruction.cc
+    test_cpseinstruction.cc
+    test_decinstruction.cc
+    test_eorinstruction.cc
+    test_fmulinstruction.cc
+    test_icallinstruction.cc
+    test_ijmpinstruction.cc
+    test_incinstruction.cc
+    test_ininstruction.cc
+    test_jmpinstruction.cc
+    test_lacinstruction.cc
+    test_lasinstruction.cc
+    test_latinstruction.cc
+    test_lddinstruction.cc
+    test_lddzinstruction.cc
+    test_ldiinstruction.cc
+    test_ldinstruction.cc
+    test_ldsinstruction.cc
+    test_lpminstruction.cc
+    test_lsrinstruction.cc
+    test_movinstruction.cc
+    test_movwinstruction.cc
+    test_mulinstruction.cc
+    test_mulsinstruction.cc
+    test_mulsuinstruction.cc
+    test_neginstruction.cc
+    test_nopinstruction.cc
+    test_oriinstruction.cc
+    test_orinstruction.cc
+    test_outinstruction.cc
+    test_popinstruction.cc
+    test_pushinstruction.cc
+    test_rcallinstruction.cc
+    test_retiinstruction.cc
+    test_retinstruction.cc
+    test_rjmpinstruction.cc
+)
+
+gtest_discover_tests(unittests)
+
+target_include_directories(unittests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/..
+)
+target_link_libraries(unittests PRIVATE cdif core instructions gtest gtest_main)
