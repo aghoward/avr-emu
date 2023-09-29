@@ -20,7 +20,7 @@ class CPIInstructionTests : public ::testing::Test
 
         uint16_t GetOpCode(OpCode opcode, uint8_t k, uint8_t dst) const
         {
-            auto kValue = static_cast<uint16_t>(((k & 0xF0u) << 8u) | (k & 0x0Fu));
+            auto kValue = static_cast<uint16_t>(((k & 0xF0u) << 4u) | (k & 0x0Fu));
             auto dstValue = static_cast<uint16_t>(((dst - 16u) & 0x0Fu) << 4u);
             return static_cast<uint16_t>(opcode) | kValue | dstValue;
         }
