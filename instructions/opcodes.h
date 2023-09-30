@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 namespace avr {
     enum class OpCode : uint16_t {
         // Arithmetic 
@@ -18,6 +20,7 @@ namespace avr {
         MUL    = 0x9C00,
         MULS   = 0x0200,
         MULSU  = 0x0300,
+        ROL    = 0x1C00,
 
         // Logic
         AND  = 0x2000,
@@ -86,6 +89,7 @@ namespace avr {
         MUL    = 0xFC00,
         MULS   = 0xFF00,
         MULSU  = 0xFF88,
+        ROL    = 0xFC00,
 
         // Logic
         AND  = 0xFC00,
