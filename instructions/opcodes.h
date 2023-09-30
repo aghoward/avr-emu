@@ -21,6 +21,7 @@ namespace avr {
         MULS   = 0x0200,
         MULSU  = 0x0300,
         ROL    = 0x1C00,
+        ROR    = 0x9407,
 
         // Logic
         AND  = 0x2000,
@@ -90,6 +91,7 @@ namespace avr {
         MULS   = 0xFF00,
         MULSU  = 0xFF88,
         ROL    = 0xFC00,
+        ROR    = 0xFE0F,
 
         // Logic
         AND  = 0xFC00,

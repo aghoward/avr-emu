@@ -53,6 +53,7 @@
 #include "instructions/reti.h"
 #include "instructions/rjmp.h"
 #include "instructions/rol.h"
+#include "instructions/ror.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -262,6 +263,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("ROL")
             .build();
+        ctx.bind<RORInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("ROR")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -321,6 +326,7 @@ namespace avr {
                 // ADC Must Come After ROL for proper function
                 // ROL RD == ADC RD, RD
                 std::unique_ptr<ROLInstruction>,
+                std::unique_ptr<RORInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }
