@@ -122,7 +122,7 @@ TEST_F(NEGInstructionTests, Execute_GivenPositiveValue_SetsNegativeFlag)
 TEST_F(NEGInstructionTests, Execute_GivenNegativeValue_ClearsNegativeFlag)
 {
     auto [opcode, dst] = GetRegisters();
-    ctx.cpu.R[dst] = static_cast<uint8_t>(rand()) | 0x80u;
+    ctx.cpu.R[dst] = static_cast<uint8_t>(rand()) | 0x82u;
     ctx.cpu.SREG.N = 1;
 
     subject.Execute(opcode, ctx);
