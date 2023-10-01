@@ -59,6 +59,7 @@ add_library(instructions STATIC
     sbic.cc
     sbis.cc
     sbiw.cc
+    sbrc.cc
 )
 
 target_include_directories(instructions PUBLIC
