@@ -54,6 +54,7 @@ add_library(instructions STATIC
     rol.cc
     ror.cc
     sbc.cc
+    sbci.cc
 )
 
 target_include_directories(instructions PUBLIC

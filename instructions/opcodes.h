@@ -23,6 +23,7 @@ namespace avr {
         ROL    = 0x1C00,
         ROR    = 0x9407,
         SBC    = 0x0800,
+        SBCI   = 0x4000,
 
         // Logic
         AND  = 0x2000,
@@ -94,6 +95,7 @@ namespace avr {
         ROL    = 0xFC00,
         ROR    = 0xFE0F,
         SBC    = 0xFC00,
+        SBCI   = 0xF000,
 
         // Logic
         AND  = 0xFC00,
