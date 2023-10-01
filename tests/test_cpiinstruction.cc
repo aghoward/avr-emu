@@ -32,6 +32,12 @@ class CPIInstructionTests : public ::testing::Test
             return std::make_tuple(std::move(compiledOpcode), dst);
         }
 
+        uint8_t create_nonzero_in_range(uint8_t mask) const
+        {
+            auto value = static_cast<uint8_t>(rand()) % mask;
+            return (value != 0) ? value : 1u;
+        }
+
     public:
         CPIInstructionTests() :
             clock(), subject(clock), ctx()
@@ -118,9 +124,9 @@ TEST_F(CPIInstructionTests, Execute_GivenEqualValues_SetsZeroFlag)
 
 TEST_F(CPIInstructionTests, Execute_GivenPositiveSourceGreaterThanPositiveDestination_SetsCarryFlag)
 {
-    uint8_t k = static_cast<uint8_t>(rand()) % 0x7Fu;
+    uint8_t k = create_nonzero_in_range(0x7Fu);
     auto [opcode, dst] = GetRegisters(k);
-    ctx.cpu.R[dst] = static_cast<uint8_t>(k - 1u);
+    ctx.cpu.R[dst] = static_cast<uint8_t>(k - 1u) & 0x7Fu;
     ctx.cpu.SREG.C = false;
 
     subject.Execute(opcode, ctx);
@@ -130,7 +136,7 @@ TEST_F(CPIInstructionTests, Execute_GivenPositiveSourceGreaterThanPositiveDestin
 
 TEST_F(CPIInstructionTests, Execute_GivenAbsoluteSourceGreaterThanAbsoluteDestination_SetsCarryFlag)
 {
-    uint8_t k = static_cast<uint8_t>(rand()) % 0xFFu | 0x80u;
+    uint8_t k = create_nonzero_in_range(0xFFu) | 0x80u;
     auto [opcode, dst] = GetRegisters(k);
     ctx.cpu.R[dst] = static_cast<uint8_t>(k - 1u);
     ctx.cpu.SREG.C = false;
@@ -142,7 +148,7 @@ TEST_F(CPIInstructionTests, Execute_GivenAbsoluteSourceGreaterThanAbsoluteDestin
 
 TEST_F(CPIInstructionTests, Execute_GivenNegativeSourceAbsoluteGreaterThanPositiveDestination_SetsCarryFlag)
 {
-    uint8_t k = static_cast<uint8_t>(rand()) % 0x7Eu | 0x80u;
+    uint8_t k = create_nonzero_in_range(0x7Eu) | 0x80u;
     auto [opcode, dst] = GetRegisters(k);
     ctx.cpu.R[dst] = static_cast<uint8_t>((k ^ 0x80u) - 1u);
     ctx.cpu.SREG.C = false;

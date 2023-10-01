@@ -1,11 +1,11 @@
 #pragma once
 
 #ifndef AVR_EMU_RAM_SIZE
-#define AVR_EMU_RAM_SIZE 0x900u
+#define AVR_EMU_RAM_SIZE 0x800u    // 2 K
 #endif
 
 #ifndef AVR_EMU_FLASH_SIZE
-#define AVR_EMU_FLASH_SIZE 0x4000u
+#define AVR_EMU_FLASH_SIZE 0x4000u // 16 K
 #endif
 
 #include <cstdint>

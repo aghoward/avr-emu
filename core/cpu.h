@@ -101,6 +101,7 @@ namespace avr {
             Z(std::addressof(R[30])),
             RAMPX(0x0u),
             RAMPY(0x0u),
+            RAMPZ(0x0u),
             RAMPD(0x0u),
             EIND(0x0u)
         {
