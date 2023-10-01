@@ -56,6 +56,7 @@
 #include "instructions/ror.h"
 #include "instructions/sbc.h"
 #include "instructions/sbci.h"
+#include "instructions/sbi.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -277,6 +278,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("SBCI")
             .build();
+        ctx.bind<SBIInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("SBI")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -339,6 +344,7 @@ namespace avr {
                 std::unique_ptr<RORInstruction>,
                 std::unique_ptr<SBCInstruction>,
                 std::unique_ptr<SBCIInstruction>,
+                std::unique_ptr<SBIInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }

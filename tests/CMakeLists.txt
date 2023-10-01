@@ -56,6 +56,7 @@ add_executable(unittests
     test_rorinstruction.cc
     test_sbcinstruction.cc
     test_sbciinstruction.cc
+    test_sbiinstruction.cc
 )
 
 gtest_discover_tests(unittests)
