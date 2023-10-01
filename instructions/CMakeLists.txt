@@ -53,6 +53,7 @@ add_library(instructions STATIC
     reti.cc
     rol.cc
     ror.cc
+    sbc.cc
 )
 
 target_include_directories(instructions PUBLIC
