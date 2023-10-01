@@ -61,6 +61,7 @@ namespace avr {
         SBIC  = 0x9900,
         SBIS  = 0x9B00,
         SBRC  = 0xFC00,
+        SBRS  = 0xFE00,
 
         // Read / Write
         LDS  = 0x9000,
@@ -139,6 +140,7 @@ namespace avr {
         SBIC  = 0xFF00,
         SBIS  = 0xFF00,
         SBRC  = 0xFE08,
+        SBRS  = 0xFE08,
 
         // Read / Write
         LDS  = 0xFE0F,

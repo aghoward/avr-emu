@@ -61,6 +61,7 @@
 #include "instructions/sbis.h"
 #include "instructions/sbiw.h"
 #include "instructions/sbrc.h"
+#include "instructions/sbrs.h"
 #include "instructions/notimplemented.h"
 
 namespace avr {
@@ -302,6 +303,10 @@ namespace avr {
             .as<InstructionExecutor>()
             .named("SBRC")
             .build();
+        ctx.bind<SBRSInstruction, IClock&>()
+            .as<InstructionExecutor>()
+            .named("SBRS")
+            .build();
         ctx.bind<NotImplementedInstruction>()
             .as<InstructionExecutor>()
             .named("NotImplemented")
@@ -369,6 +374,7 @@ namespace avr {
                 std::unique_ptr<SBISInstruction>,
                 std::unique_ptr<SBIWInstruction>,
                 std::unique_ptr<SBRCInstruction>,
+                std::unique_ptr<SBRSInstruction>,
                 std::unique_ptr<NotImplementedInstruction>>()
             .build();
     }
