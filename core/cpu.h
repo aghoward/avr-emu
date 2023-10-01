@@ -57,6 +57,16 @@ namespace avr {
             *this = static_cast<uint16_t>(value + 1u);
             return value;
         }
+
+        uint16_t operator-(uint16_t value) const
+        {
+            return this->operator*() - value;
+        }
+
+        uint16_t operator+(uint16_t value) const
+        {
+            return this->operator*() + value;
+        }
     };
 
     struct CPU {
