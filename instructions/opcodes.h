@@ -57,6 +57,8 @@ namespace avr {
         RET   = 0x9508,
         RETI  = 0x9518,
         RJMP  = 0xC000,
+        SBIC  = 0x9900,
+        SBIS  = 0x9B00,
 
         // Read / Write
         LDS  = 0x9000,
@@ -74,6 +76,7 @@ namespace avr {
         OUT  = 0xB800,
         POP  = 0x900F,
         PUSH = 0x920F,
+        STS  = 0x9200,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -130,6 +133,8 @@ namespace avr {
         RET   = 0xFFFF,
         RETI  = 0xFFFF,
         RJMP  = 0xF000,
+        SBIC  = 0xFF00,
+        SBIS  = 0xFF00,
 
         // Read / Write
         LDS  = 0xFE0F,
@@ -147,5 +152,6 @@ namespace avr {
         OUT  = 0xF800,
         POP  = 0xFE0F,
         PUSH = 0xFE0F,
+        STS  = 0xFE0F,
     };
 }

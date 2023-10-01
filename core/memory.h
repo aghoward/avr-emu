@@ -25,6 +25,11 @@ namespace avr {
             {
                 return _data[address];
             }
+
+            constexpr std::size_t size() const
+            {
+                return Size;
+            }
     };
 
     using SRAM = Memory<AVR_EMU_RAM_SIZE>;

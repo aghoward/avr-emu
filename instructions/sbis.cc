@@ -1,4 +1,4 @@
-#include "instructions/cpse.h"
+#include "instructions/sbis.h"
 #include "instructions/opcodes.h"
 
 #include <algorithm>
@@ -7,20 +7,19 @@
 #include <tuple>
 
 namespace avr {
-    uint8_t& CPSEInstruction::GetSourceRegister(CPU& cpu, uint16_t opcode) const
+    uint8_t SBISInstruction::GetBit(uint16_t opcode) const
     {
-        auto index = static_cast<uint16_t>(((opcode & 0x0200u) >> 5u) | (opcode & 0x000Fu));
-        return cpu.R[index];
+        return static_cast<uint8_t>(opcode & 0x07u);
     }
 
-    uint8_t& CPSEInstruction::GetDestinationRegister(CPU& cpu, uint16_t opcode) const
+    uint8_t& SBISInstruction::GetIORegister(CPU& cpu, uint16_t opcode) const
     {
-        auto mask = 0x01F0u;
-        auto index = static_cast<uint16_t>((opcode & mask) >> 4);
-        return cpu.R[index];
+        auto mask = 0x00F8u;
+        auto index = static_cast<uint8_t>((opcode & mask) >> 3);
+        return cpu.GPIO[index];
     }
 
-    uint16_t CPSEInstruction::GetNextOpCode(const CPU& cpu, const ProgramMemory& mem) const
+    uint16_t SBISInstruction::GetNextOpCode(const CPU& cpu, const ProgramMemory& mem) const
     {
         auto pc = cpu.PC;
         auto opcode = static_cast<uint16_t>(0u);
@@ -29,7 +28,7 @@ namespace avr {
         return opcode;
     }
 
-    uint16_t CPSEInstruction::GetOpCodeSize(uint16_t opcode) const
+    uint16_t SBISInstruction::GetOpCodeSize(uint16_t opcode) const
     {
         const static std::array twoWordOpCodes = 
         {
@@ -50,13 +49,13 @@ namespace avr {
         return (it == std::end(twoWordOpCodes)) ? 1u : 2u;
     }
 
-    uint32_t CPSEInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
+    uint32_t SBISInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const
     {
-        auto& rr = GetSourceRegister(ctx.cpu, opcode);
-        auto& rd = GetDestinationRegister(ctx.cpu, opcode);
+        auto bit = GetBit(opcode);
+        auto& io = GetIORegister(ctx.cpu, opcode);
 
-        if (rr != rd)
-        {
+        auto bitIsSet = (io & (0x1u << bit)) != 0u;
+        if (!bitIsSet) {
             _clock.ConsumeCycle();
             return 1u;
         }
@@ -72,10 +71,10 @@ namespace avr {
         return 1u + nextOpcodeSize;
     }
 
-    bool CPSEInstruction::Matches(uint16_t opcode) const
+    bool SBISInstruction::Matches(uint16_t opcode) const
     {
-        auto op = static_cast<uint16_t>(OpCode::CPSE);
-        auto mask = static_cast<uint16_t>(OpCodeMask::CPSE);
+        auto op = static_cast<uint16_t>(OpCode::SBIS);
+        auto mask = static_cast<uint16_t>(OpCodeMask::SBIS);
         return (opcode & mask) == op;
     }
 }
