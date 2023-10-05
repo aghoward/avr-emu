@@ -61,6 +61,16 @@ add_library(instructions STATIC
     sbiw.cc
     sbrc.cc
     sbrs.cc
+    sleep.cc
+    spm.cc
+    stx.cc
+    sty.cc
+    stz.cc
+    sts.cc
+    sub.cc
+    subi.cc
+    swap.cc
+    xch.cc
 )
 
 target_include_directories(instructions PUBLIC
@@ -68,3 +78,5 @@ target_include_directories(instructions PUBLIC
 )
 
 target_link_libraries(instructions PRIVATE cdif)
+
+target_compile_options(instructions PRIVATE -g -O0)

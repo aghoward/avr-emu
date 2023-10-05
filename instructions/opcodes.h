@@ -25,6 +25,9 @@ namespace avr {
         SBC    = 0x0800,
         SBCI   = 0x4000,
         SBIW   = 0x9700,
+        SUB    = 0x1800,
+        SUBI   = 0x5000,
+        SWAP   = 0x9402,
 
         // Logic
         AND  = 0x2000,
@@ -45,6 +48,7 @@ namespace avr {
         CPI   = 0x3000,
         NOP   = 0x0000,
         SBI   = 0x9A00,
+        SLEEP = 0x9588,
 
         // Branching
         BRBC  = 0xF400,
@@ -80,6 +84,11 @@ namespace avr {
         POP  = 0x900F,
         PUSH = 0x920F,
         STS  = 0x9200,
+        SPM  = 0x95E8,
+        STX  = 0x920C,
+        STY  = 0x8208,
+        STZ  = 0x8200,
+        XCH  = 0x9204,
     };
 
     enum class OpCodeMask : uint16_t {
@@ -104,6 +113,9 @@ namespace avr {
         SBC    = 0xFC00,
         SBCI   = 0xF000,
         SBIW   = 0xFF00,
+        SUB    = 0xFC00,
+        SUBI   = 0xF000,
+        SWAP   = 0xFE0F,
 
         // Logic
         AND  = 0xFC00,
@@ -124,6 +136,7 @@ namespace avr {
         CPI   = 0xF000,
         NOP   = 0xFFFF,
         SBI   = 0xFF00,
+        SLEEP = 0xFFFF,
 
         // Branching
         BRBC  = 0xFC00,
@@ -159,5 +172,10 @@ namespace avr {
         POP  = 0xFE0F,
         PUSH = 0xFE0F,
         STS  = 0xFE0F,
+        SPM  = 0xFFFF,
+        STX  = 0xFE0C,
+        STY  = 0xC208,
+        STZ  = 0xC208,
+        XCH  = 0xFE0F,
     };
 }

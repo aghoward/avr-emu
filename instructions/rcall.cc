@@ -18,7 +18,7 @@ namespace avr {
         auto value = static_cast<int16_t>(opcode & 0x0FFF);
         if ((value & 0x0800) != 0)
             value = static_cast<int16_t>(value | 0xF000);
-        return value;
+        return value << 1;
     }
 
     uint32_t RCALLInstruction::Execute(uint16_t opcode, ExecutionContext& ctx) const

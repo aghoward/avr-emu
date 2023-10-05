@@ -40,7 +40,7 @@ class RCALLInstructionTests : public ::testing::Test
         {
             return static_cast<uint16_t>(
                 static_cast<uint16_t>(OpCode::RCALL) |
-                (relativePosition & 0x0FFF));
+                ((relativePosition >> 1) & 0x0FFF));
         }
 
     public:
