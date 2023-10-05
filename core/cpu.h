@@ -101,6 +101,8 @@ namespace avr {
         uint8_t RAMPD;
         uint8_t EIND;
 
+        bool is_sleeping;
+
         CPU(SRAM& mem) :
             R(std::addressof(mem[0x00])),
             GPIO(std::addressof(mem[R_END + 1u])),
@@ -113,7 +115,8 @@ namespace avr {
             RAMPY(0x0u),
             RAMPZ(0x0u),
             RAMPD(0x0u),
-            EIND(0x0u)
+            EIND(0x0u),
+            is_sleeping(false)
         {
             SREG.C = SREG.Z = SREG.N = SREG.V = SREG.S = SREG.H = SREG.T = SREG.I = false;
         }

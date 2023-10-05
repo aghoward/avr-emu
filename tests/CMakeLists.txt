@@ -72,6 +72,7 @@ add_executable(unittests
     test_subiinstruction.cc
     test_swapinstruction.cc
     test_xchinstruction.cc
+    test_executor.cc
 )
 
 gtest_discover_tests(unittests)

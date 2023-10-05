@@ -33,7 +33,7 @@ namespace avr {
         using namespace std::string_literals;
         auto cyclesConsumed = 0u;
 
-        while (cyclesConsumed < cyclesRequested)
+        while (cyclesConsumed < cyclesRequested && !ctx.cpu.is_sleeping)
         {
             auto opcode = FetchWord(ctx.progMem, ctx.cpu.PC);
             ctx.cpu.PC += sizeof(ctx.cpu.PC);

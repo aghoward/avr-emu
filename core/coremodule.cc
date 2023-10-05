@@ -5,6 +5,7 @@
 #include "core/executor.h"
 #include "core/iclock.h"
 #include "core/memory.h"
+#include "core/noopclock.h"
 #include "instructions/instructionexecutor.h"
 
 #include <memory>
@@ -14,8 +15,8 @@ namespace avr
 {
     void CoreModule::load(cdif::Container& ctx)
     {
-        ctx.bind<Clock>().as<IClock>().in<cdif::Scope::Singleton>().build();
-        ctx.bind<ExecutionContext>().in<cdif::Scope::Singleton>().build();
+        ctx.bind<NoopClock>().as<IClock>().in<cdif::Scope::Singleton>().build();
+        ctx.bind<ExecutionContext>().build();
 
         ctx
             .bind<Executor,
