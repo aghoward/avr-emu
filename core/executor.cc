@@ -19,7 +19,6 @@ namespace avr {
         return value;
     }
 
-
     const std::unique_ptr<InstructionExecutor>& Executor::GetExecutor(const uint16_t opcode) const
     {
         auto it = std::find_if(
@@ -40,5 +39,18 @@ namespace avr {
             const auto& instruction_executor = GetExecutor(opcode);
             cyclesConsumed += instruction_executor->Execute(opcode, ctx);
         }
+    }
+
+    void Executor::Interrupt(ExecutionContext& ctx, uint8_t interrupt) const
+    {
+        ctx.cpu.R[24] = interrupt;
+        auto old_pc = ctx.cpu.PC;
+        // push PC
+        ctx.ram[ctx.cpu.SP--] = (ctx.cpu.PC & 0xff);
+        ctx.ram[ctx.cpu.SP--] = ((ctx.cpu.PC >> 8) & 0xff);
+        ctx.cpu.PC = 0x910;
+
+        while (ctx.cpu.PC != old_pc)
+            Execute(ctx, 1);
     }
 }

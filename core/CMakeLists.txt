@@ -3,6 +3,7 @@ add_library(core STATIC
     coremodule.cc
     executor.cc
     noopclock.cc
+    loader.cc
 )
 
 target_include_directories(core PUBLIC

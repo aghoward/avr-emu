@@ -27,5 +27,6 @@ namespace avr {
             {}
 
             void Execute(ExecutionContext& ctx, uint32_t cyclesRequested) const;
+            void Interrupt(ExecutionContext& ctx, uint8_t interrupt) const;
     };
 }
