@@ -32,10 +32,9 @@ namespace avr {
         auto& index = ctx.cpu.X;
         if (IsPreDecrement(opcode))
             index--;
-        auto destination = IndirectRegister(&ctx.ram[*index]);
+        ctx.ram[*index] = source;
         if (IsPostIncrement(opcode))
             index++;
-        destination = source;
         _clock.ConsumeCycle();
         return _cyclesConsumed;
     }
