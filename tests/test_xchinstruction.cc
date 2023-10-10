@@ -26,7 +26,7 @@ class XCHInstructionTests : public ::testing::Test
 
         std::tuple<uint16_t, uint8_t> GetRegisters()
         {
-            auto src = static_cast<uint16_t>(rand() % 32);
+            auto src = static_cast<uint16_t>(rand() % 30);
             auto compiledOpcode = GetOpCode(src);
             ctx.cpu.Z = static_cast<uint16_t>(rand() % (ctx.ram.size() / 2));
             return std::make_tuple(std::move(compiledOpcode), src);

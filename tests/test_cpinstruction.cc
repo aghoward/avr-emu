@@ -289,7 +289,7 @@ TEST_F(CPInstructionTests, ExecuteCPC_GivenPositiveSourceGreaterThanPositiveDest
 TEST_F(CPInstructionTests, ExecuteCPC_GivenAbsoluteSourceGreaterThanAbsoluteDestination_SetsCarryFlag)
 {
     auto [opcode, src, dst] = GetRegisters(OpCode::CPC);
-    auto dstValue = static_cast<uint8_t>(rand()) % 0xFEu | 0x80u;
+    auto dstValue = static_cast<uint8_t>(rand() & 0xFEu) | 0x80u;
     auto srcValue = dstValue + 1u;
     ctx.cpu.R[dst] = static_cast<uint8_t>(dstValue);
     ctx.cpu.R[src] = static_cast<uint8_t>(srcValue);
