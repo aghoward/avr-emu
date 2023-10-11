@@ -10,13 +10,10 @@ namespace avr {
         return static_cast<uint8_t>(opcode & mask);
     }
 
-    uint8_t BRBCInstruction::GetDestinationOffset(uint16_t opcode) const
+    int8_t BRBCInstruction::GetDestinationOffset(uint16_t opcode) const
     {
         auto mask = 0x03F8;
-        auto offset = static_cast<uint8_t>((opcode & mask) >> 3);
-        if (0x40u & offset)
-            return ~(offset - 1u);
-        return offset;
+        return static_cast<uint8_t>((opcode & mask) >> 2);
     }
 
     bool BRBCInstruction::ShouldBranch(uint16_t opcode, const CPU& cpu, uint8_t flagIndex) const
@@ -51,10 +48,7 @@ namespace avr {
             return 1;
 
         auto offset = GetDestinationOffset(opcode);
-        if (offset & 0x80u)
-            ctx.cpu.PC -= (offset & 0x3F);
-        else
-            ctx.cpu.PC += offset;
+        ctx.cpu.PC += offset;
 
         _clock.ConsumeCycle();
 

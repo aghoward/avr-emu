@@ -17,10 +17,10 @@ class BRBCInstructionTests : public ::testing::Test
         BRBCInstruction subject;
         ExecutionContext ctx;
 
-        uint16_t GetOpCode(OpCode opcode, uint8_t src, int16_t dst) const
+        uint16_t GetOpCode(OpCode opcode, uint8_t src, int8_t dst) const
         {
             auto srcValue = static_cast<uint16_t>(src & 0x07u);
-            auto dstValue = static_cast<uint16_t>(((dst & 0x3F) | ((0x8000 & dst) >> 9)) << 3u);
+            auto dstValue = static_cast<uint16_t>(((dst & 0xFE)) << 2u);
             return static_cast<uint16_t>(opcode) | srcValue | dstValue;
         }
 
