@@ -90,17 +90,17 @@ TEST_F(ExecutorTests, AttachInterrupt_PlacesInterruptHandlerInMemory)
     ctx.cpu.R[22] = 0xCD;
     ctx.cpu.R[23] = 0xAB;
 
-    subject.Execute(ctx, 9);
+    subject.Execute(ctx, 10);
 
-    ASSERT_EQ(ctx.cpu.PC, 0x90Eu);
-    ASSERT_EQ(*ctx.cpu.Z, AVR_EMU_RAM_SIZE - 4u);
-    ASSERT_EQ(ctx.ram[AVR_EMU_RAM_SIZE - 4u], 0xCD);
-    ASSERT_EQ(ctx.ram[AVR_EMU_RAM_SIZE - 3u], 0xAB);
+    ASSERT_EQ(ctx.cpu.PC, 0x910u);
+    ASSERT_EQ(*ctx.cpu.Z, 0x7F2);
+    ASSERT_EQ(ctx.ram[0x7F2], 0xCD);
+    ASSERT_EQ(ctx.ram[0x7F3], 0xAB);
 }
 
 TEST_F(ExecutorTests, CallInterrupt_GivenInterruptDisabled_ReturnsWithInterruptDisabled)
 {
-    ctx.cpu.PC = 0x910u;
+    ctx.cpu.PC = 0x912u;
     ctx.cpu.SP = ctx.ram.size() - 0x20;
     ctx.cpu.SREG.I = false;
     ctx.cpu.R[24] = 0x1;
@@ -108,21 +108,21 @@ TEST_F(ExecutorTests, CallInterrupt_GivenInterruptDisabled_ReturnsWithInterruptD
     subject.Execute(ctx, 2);
 
     ASSERT_FALSE(ctx.cpu.SREG.I);
-    ASSERT_EQ(ctx.cpu.PC, 0x926u);
+    ASSERT_EQ(ctx.cpu.PC, 0x92Cu);
 }
 
 TEST_F(ExecutorTests, CallInterrupt_GivenInterruptEnabled_CallsHandlerFromMemory)
 {
-    ctx.cpu.PC = 0x910u;
+    ctx.cpu.PC = 0x912u;
     ctx.cpu.SP = ctx.ram.size() - 0x20;
     ctx.cpu.SREG.I = true;
-    ctx.ram[AVR_EMU_RAM_SIZE - 4u] = 0xCD;
-    ctx.ram[AVR_EMU_RAM_SIZE - 3u] = 0xAB;
+    ctx.ram[0x7F2] = 0xCD;
+    ctx.ram[0x7F3] = 0xAB;
     ctx.cpu.R[24] = 0x1;
 
-    subject.Execute(ctx, 11);
+    subject.Execute(ctx, 13);
 
-    ASSERT_EQ(ctx.cpu.PC, 0x922u);
+    ASSERT_EQ(ctx.cpu.PC, 0x928u);
     ASSERT_EQ(*ctx.cpu.Z, 0xABCD);
     ASSERT_FALSE(ctx.cpu.SREG.I);
 }
@@ -138,8 +138,8 @@ TEST_F(ExecutorTests, Interrupt_GivenInterruptEnabled_ExecutesHandlerToEnd)
         0x0A00
     );
     // Set interrupt handler 0
-    ctx.ram[0x7FE] = 0x00;
-    ctx.ram[0x7FF] = 0x0A;
+    ctx.ram[0x7F0] = 0x00;
+    ctx.ram[0x7F1] = 0x0A;
     ctx.cpu.SREG.I = true;
 
     subject.Interrupt(ctx, 0);

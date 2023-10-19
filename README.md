@@ -24,7 +24,7 @@ class. This sets up the emulator with the following memory layout:
   * 0x0000 - 0x001F  Memory Mapped Registers
   * 0x0020 - 0x005F  Memory Mapped GPIO
   * 0x0060 - 0x00FF  Unused
-  * 0x0100 - 0x08FF  RAM
+  * 0x0100 - 0x07FF  RAM
   * 0x0900 - 0x4900  Program Memory
 
 The first 40 bytes of program memory are occuppied by the interrupt handling

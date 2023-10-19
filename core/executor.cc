@@ -48,7 +48,7 @@ namespace avr {
         // push PC
         ctx.ram[ctx.cpu.SP--] = (ctx.cpu.PC & 0xff);
         ctx.ram[ctx.cpu.SP--] = ((ctx.cpu.PC >> 8) & 0xff);
-        ctx.cpu.PC = 0x910;
+        ctx.cpu.PC = 0x912;
 
         while (ctx.cpu.PC != old_pc)
             Execute(ctx, 1);
